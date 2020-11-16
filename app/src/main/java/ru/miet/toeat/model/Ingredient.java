@@ -1,28 +1,33 @@
 package ru.miet.toeat.model;
 
 import java.io.Serializable;
+import ru.miet.toeat.tools.Tools;
 
 public class Ingredient implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private float amount = 0;
 	private Product product = new Product();
 	private String category = "nocategory";
-	
+
 	public Ingredient() {
 		super();
 	}
-	public Ingredient(float amount, Product product) {
+	public Ingredient(float amount, Product product, String category) throws FormatException {
 		super();
-		this.amount = amount;
-		this.product = product;
+		setAmount(amount);
+		setProduct(product);
+		setCategory(category);
 	}
-	
+
 	public float getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
-		this.amount = amount;
+	public void setAmount(float amount) throws FormatException {
+		if(Tools.isInRange(amount, 0, Float.MAX_VALUE))
+			this.amount = amount;
+		else
+			throw new FormatException("Wrong set amount in Ingredient");
 	}
 	public Product getProduct() {
 		return product;
@@ -33,7 +38,10 @@ public class Ingredient implements Serializable {
 	public String getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory(String category) throws FormatException {
+		if(Tools.isCorrectFormat(category, ""))
+			this.category = category;
+		else
+			throw new FormatException("Wrong set category in Ingredient");
 	}
 }

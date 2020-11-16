@@ -5,25 +5,25 @@ import ru.miet.toeat.model.Nutrition;
 
 public class Menu extends Nutrition {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Meal breakfast = new Meal();
 	private Meal tiffin = new Meal();//same as lunch
 	private Meal dinner = new Meal();
 	private Meal anSnack = new Meal();
 	private Meal supper = new Meal();
 	private Meal snack = new Meal();
-	
+
 	public Menu() {
 		super();
 	}
 	public Menu(Meal breakfast, Meal tiffin, Meal dinner, Meal anSnack, Meal supper, Meal snack) {
 		super();
-		this.breakfast = breakfast;
-		this.tiffin = tiffin;
-		this.dinner = dinner;
-		this.anSnack = anSnack;
-		this.supper = supper;
-		this.snack = snack;
+		setBreakfast(breakfast);
+		setTiffin(tiffin);
+		setDinner(dinner);
+		setSnack(anSnack);
+		setSupper(supper);
+		setSnack(snack);
 	}
 
 	public Meal getBreakfast() {
@@ -62,9 +62,9 @@ public class Menu extends Nutrition {
 	public void setSnack(Meal snack) {
 		this.snack = snack;
 	}
-	
+
 	//TODO: implement this
 	public void calcNutrition() {
-		
+
 	}
 }
