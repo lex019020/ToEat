@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/rationFragment">
+
+    <fragment
+        android:id="@+id/rationFragment"
+        android:name="ru.miet.toeat.ui.today_menu.RationFragment"
+        android:label="fragment_ration"
+        tools:layout="@layout/fragment_ration" />
+    <fragment
+        android:id="@+id/favsFragment"
+        android:name="ru.miet.toeat.ui.favorites.FavsFragment"
+        android:label="fragment_favs"
+        tools:layout="@layout/fragment_favs" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="ru.miet.toeat.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.miet.toeat.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
