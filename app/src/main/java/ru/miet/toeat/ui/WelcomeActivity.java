@@ -42,7 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void switchToMainMenu(){
         Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
