@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_today_menu"
+    <item android:title="Рацион"
         android:icon="@drawable/ic_food_white"
-        android:title="@string/title_menu" />
+        android:id="@+id/rationFragment"/>
 
-    <item
-        android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_history_white"
-        android:title="@string/title_history" />
-
-    <item
-        android:id="@+id/navigation_favorites"
+    <item android:title="Избранное"
         android:icon="@drawable/ic_fav_white"
-        android:title="@string/title_favorites" />
+        android:id="@+id/favsFragment"/>
 
-    <item
-        android:id="@+id/navigation_settings"
+    <item android:title="История"
+        android:icon="@drawable/ic_history_white"
+        android:id="@+id/historyFragment"/>
+
+    <item android:title="Настройки"
         android:icon="@drawable/ic_settings_white"
-        android:title="@string/title_settings" />
+        android:id="@+id/settingsFragment"/>
 
 </menu>
