@@ -32,13 +32,13 @@ public class RationFragment extends Fragment {
     private TextView tv_supper;
     private TextView tv_snack;
 
-    private Layout lay_list;
-    private Layout lay_breakfast;
-    private Layout lay_tiffin;
-    private Layout lay_dinner;
-    private Layout lay_aft_snack;
-    private Layout lay_supper;
-    private Layout lay_snack;
+    private LinearLayout lay_list;
+    private LinearLayout lay_breakfast;
+    private LinearLayout lay_tiffin;
+    private LinearLayout lay_dinner;
+    private LinearLayout lay_aft_snack;
+    private LinearLayout lay_supper;
+    private LinearLayout lay_snack;
 
     private Menu today_menu;
 
@@ -66,7 +66,13 @@ public class RationFragment extends Fragment {
         tv_supper = getView().findViewById(R.id.tv_supper_name);
         tv_snack = getView().findViewById(R.id.tv_snack_name);
 
-        //lay_list
+        lay_list = getView().findViewById(R.id.today_menu_layout);
+        lay_breakfast = getView().findViewById(R.id.lay_breakfast_element);
+        lay_tiffin = getView().findViewById(R.id.lay_tiffin_element);
+        lay_dinner = getView().findViewById(R.id.lay_dinner_element);
+        lay_aft_snack = getView().findViewById(R.id.lay_afternoon_snack_element);
+        lay_supper = getView().findViewById(R.id.lay_supper_element);
+        lay_snack = getView().findViewById(R.id.lay_snack_element);
         // TODO
     }
 

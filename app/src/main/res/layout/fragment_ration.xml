@@ -28,57 +28,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription">
 
         <LinearLayout
             android:id="@+id/lay_breakfast_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Завтрак:" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Завтрак:"
-                        style="@style/MealTypeCaption"
-                         />
-
-                    <TextView
-                        android:id="@+id/tv_breakfast_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        style="@style/MealNameInList"
-                        android:text="Творог с алюминиевой стружкой"
-                         />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView3"
+                <TextView
+                    android:id="@+id/tv_breakfast_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white"
+                 />
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,49 +80,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView32"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Второй завтрак:" />
 
-                    <TextView
-                        android:id="@+id/textView32"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Второй завтрак:"
-                        style="@style/MealTypeCaption"
-                         />
-
-                    <TextView
-                        android:id="@+id/tv_btiffin_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Творог с алюминиевой стружкой"
-                        style="@style/MealNameInList" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView32"
+                <TextView
+                    android:id="@+id/tv_btiffin_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView32"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -136,48 +123,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView33"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Обед:" />
 
-                    <TextView
-                        android:id="@+id/textView33"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Обед:"
-                        style="@style/MealTypeCaption"/>
-
-                    <TextView
-                        android:id="@+id/tv_dinner_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Творог с алюминиевой стружкой"
-                        style="@style/MealNameInList" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView33"
+                <TextView
+                    android:id="@+id/tv_dinner_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -185,48 +166,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView34"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Полдник:" />
 
-                    <TextView
-                        android:id="@+id/textView34"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Полдник:"
-                        style="@style/MealTypeCaption"/>
-
-                    <TextView
-                        android:id="@+id/tv_afternoon_snack_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Творог с алюминиевой стружкой"
-                        style="@style/MealNameInList" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView34"
+                <TextView
+                    android:id="@+id/tv_afternoon_snack_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView34"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -234,48 +209,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView35"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Ужин:" />
 
-                    <TextView
-                        android:id="@+id/textView35"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Ужин:"
-                        style="@style/MealTypeCaption" />
-
-                    <TextView
-                        android:id="@+id/tv_supper_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Творог с алюминиевой стружкой"
-                        style="@style/MealNameInList" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView35"
+                <TextView
+                    android:id="@+id/tv_supper_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView35"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -283,48 +252,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="false"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView36"
+                    style="@style/MealTypeCaption"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:orientation="vertical">
+                    android:text="Перекус:" />
 
-                    <TextView
-                        android:id="@+id/textView36"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Перекус:"
-                        style="@style/MealTypeCaption" />
-
-                    <TextView
-                        android:id="@+id/tv_snack_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:text="Творог с алюминиевой стружкой"
-                        style="@style/MealNameInList" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView36"
+                <TextView
+                    android:id="@+id/tv_snack_name"
+                    style="@style/MealNameInList"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_right_white" />
-
+                    android:text="Творог с алюминиевой стружкой" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView36"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_white" />
+
         </LinearLayout>
 
     </LinearLayout>
