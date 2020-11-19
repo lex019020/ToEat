@@ -55,7 +55,7 @@
                     android:text="Завтрак:" />
 
                 <TextView
-                    android:id="@+id/tv_breakfast_name"
+                    android:id="@+id/tv_settings_name"
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:text="Второй завтрак:" />
 
                 <TextView
-                    android:id="@+id/tv_btiffin_name"
+                    android:id="@+id/tv_settings_sex"
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

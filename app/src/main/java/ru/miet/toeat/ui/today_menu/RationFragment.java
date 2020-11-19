@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ru.miet.toeat.R;
-import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Menu;
 
 
@@ -59,8 +57,8 @@ public class RationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tv_breakfast = getView().findViewById(R.id.tv_breakfast_name);
-        tv_tiffin = getView().findViewById(R.id.tv_btiffin_name);
+        tv_breakfast = getView().findViewById(R.id.tv_settings_name);
+        tv_tiffin = getView().findViewById(R.id.tv_settings_sex);
         tv_dinner = getView().findViewById(R.id.tv_dinner_name);
         tv_aft_snack = getView().findViewById(R.id.tv_afternoon_snack_name);
         tv_supper = getView().findViewById(R.id.tv_supper_name);
