@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.today_menu.RationFragment">
+    tools:context=".ui.todayMenu.RationFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -55,7 +55,7 @@
                     android:text="Завтрак:" />
 
                 <TextView
-                    android:id="@+id/tv_settings_name"
+                    android:id="@+id/tv_breakfast"
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:text="Второй завтрак:" />
 
                 <TextView
-                    android:id="@+id/tv_settings_sex"
+                    android:id="@+id/tv_tiffin"
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/rationFragment"
-        android:name="ru.miet.toeat.ui.today_menu.RationFragment"
+        android:name="ru.miet.toeat.ui.todayMenu.RationFragment"
         android:label="fragment_ration"
         tools:layout="@layout/fragment_ration" />
     <fragment
