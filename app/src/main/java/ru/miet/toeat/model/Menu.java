@@ -1,5 +1,7 @@
 package ru.miet.toeat.model;
 
+import java.lang.reflect.Field;
+
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Nutrition;
 
@@ -63,8 +65,14 @@ public class Menu extends Nutrition {
 		this.snack = snack;
 	}
 
-	//TODO: implement this
-	public void calcNutrition() {
-
+	//TODO: check and think about exceptions
+	public void calcNutrition() /*throws IllegalAccessException*/ {
+		proteins = breakfast.proteins + tiffin.proteins + dinner.proteins + snack.proteins +
+				supper.proteins + anSnack.proteins;
+		fat = breakfast.fat + tiffin.fat + dinner.fat + snack.fat + supper.fat + anSnack.fat;
+		calories = breakfast.calories + tiffin.calories + dinner.calories +
+				snack.calories + supper.calories + anSnack.calories;
+		carbs = breakfast.carbs + tiffin.carbs + dinner.carbs + snack.carbs + supper.carbs +
+				anSnack.carbs;
 	}
 }

@@ -1,8 +1,11 @@
 package ru.miet.toeat.infoStorage;
 
+import java.lang.reflect.Array;
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Meal;
@@ -66,7 +69,7 @@ public class User extends Nutrition {
 	}
 	public void removeFavorMeal(String name) {
 		for(Meal m : favorMeals) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				favorMeals.remove(m);
 			}
 		}
@@ -76,7 +79,7 @@ public class User extends Nutrition {
 	}
 	public void removeUnfavorMeal(String name) {
 		for(Meal m : unfavorMeals) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				unfavorMeals.remove(m);
 			}
 		}
@@ -86,7 +89,7 @@ public class User extends Nutrition {
 	}
 	public void removeFavorProduct(String name) {
 		for(Product p : favorProducts) {
-			if(p.getName() == name) {
+			if(p.getName().equals(name)) {
 				favorProducts.remove(p);
 			}
 		}
@@ -96,7 +99,7 @@ public class User extends Nutrition {
 	}
 	public void removeUnfavorProduct(String name) {
 		for(Product p : unfavorProducts) {
-			if(p.getName() == name) {
+			if(p.getName().equals(name)) {
 				unfavorProducts.remove(p);
 			}
 		}
@@ -106,7 +109,7 @@ public class User extends Nutrition {
 	}
 	public void removeMealFromHistory(String name) {
 		for(Meal m : mealHistory) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				mealHistory.remove(m);
 			}
 		}
@@ -209,9 +212,55 @@ public class User extends Nutrition {
 		this.mealHistory = mealHistory;
 	}
 
-	//TODO: implement this
+	//TODO: add more logic, define special way
 	public void genMenu() {
+        Random rand = new Random();
+        int[] filling = new int[6];
+        // должно работать
+        // но в любом случае позже всё исправлю... ДК.
+        for(int i: filling) { i = -1; }
+        while(true) {
+        	boolean flag = false;
+        	int num = rand.nextInt() % DataBase.getInstance().getMeals().size();
+        	for(int i: filling) {
+        		if (i == num) {flag = true;}
+			}
+        	if(flag) continue;
+        	for(int i = 0; i < 6; i++) {
+				if (filling[i] == -1) {
+					// adding 10 is necessary, when we have less than 6 meals, to let repeats to be
+					filling[i] = num + (DataBase.getInstance().getMeals().size() < 6 ? 10 : 0);
+					switch (i) {
+						case 0:
+							menu.setBreakfast(DataBase.getInstance().getMeals().get(num));
+							break;
+						case 1:
+							menu.setTiffin(DataBase.getInstance().getMeals().get(num));
+							break;
+						case 2:
+							menu.setAnSnack(DataBase.getInstance().getMeals().get(num));
+							break;
+						case 3:
+							menu.setDinner(DataBase.getInstance().getMeals().get(num));
+							break;
+						case 4:
+							menu.setSupper(DataBase.getInstance().getMeals().get(num));
+							break;
+						case 5:
+							menu.setSnack(DataBase.getInstance().getMeals().get(num));
+							break;
+						default:
+							break;
+					}
+				}
+			}
 
+        	for(int i: filling) {
+				if (i == -1) flag = true;
+			}
+        	if(!flag)
+        		break;
+		}
 	}
 
 	public void upload(){
