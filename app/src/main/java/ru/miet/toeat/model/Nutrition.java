@@ -59,4 +59,21 @@ public class Nutrition implements Serializable{
 		else
 			throw new FormatException("Wrong set calories in Nutrition");
 	}
+
+	public boolean equals(Nutrition compare){
+		boolean ret = true;
+		if(proteins != compare.proteins) {
+			ret = false;
+		}
+		if(fat != compare.fat){
+			ret = false;
+		}
+		if(carbs != compare.carbs){
+			ret = false;
+		}
+		if(calories != compare.calories){
+			ret = false;
+		}
+		return ret;
+	}
 }

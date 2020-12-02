@@ -48,4 +48,18 @@ public class Product implements Serializable {
 		else
 			throw new FormatException("Wrong set name in Product");
 	}
+
+	public boolean equals(Product compare){
+		boolean ret = true;
+		if(!name.equals(name)) {
+			ret = false;
+		}
+		if(!description.equals(description)) {
+			ret = false;
+		}
+		if(id != compare.id){
+			ret = false;
+		}
+		return ret;
+	}
 }
