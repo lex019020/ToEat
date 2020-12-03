@@ -34,6 +34,8 @@ public class TestModel {
             breakfast.setFat(0);
             breakfast.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -60,7 +62,8 @@ public class TestModel {
             tiffin.setFat(0);
             tiffin.setProteins(0);
         } catch (FormatException e) {
-
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -87,6 +90,8 @@ public class TestModel {
             dinner.setFat(0);
             dinner.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -113,6 +118,8 @@ public class TestModel {
             anSnack.setFat(0);
             anSnack.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -139,6 +146,8 @@ public class TestModel {
             supper.setFat(0);
             supper.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -165,6 +174,8 @@ public class TestModel {
             snack.setFat(0);
             snack.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
