@@ -1,5 +1,6 @@
 package ru.miet.toeat;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,11 +11,20 @@ import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.model.*;
 
 
-public class Test1 {
+public class TestModel {
+    private Meal breakfast = new Meal();
+    private Meal tiffin = new Meal();//same as lunch
+    private Meal dinner = new Meal();
+    private Meal anSnack = new Meal();
+    private Meal supper = new Meal();
+    private Meal snack = new Meal();
+
+    boolean badError = false;
+
     @Test
-    public void genMenu(){
-        boolean badError = false;
-        Meal breakfast = new Meal();
+    public void genMeal1(){
+        badError = false;
+        breakfast = new Meal();
         try {
             breakfast.setRating(0);
             breakfast.setName("breakfast");
@@ -36,9 +46,11 @@ public class Test1 {
         assertEquals(breakfast.getProteins(), 0, 0);
         assertEquals("breakfast", breakfast.getName());
         assertEquals("breakfast", breakfast.getType());
-
+    }
+    @Test
+    public void genMeal2(){
         badError = false;
-        Meal tiffin = new Meal();//same as lunch
+        tiffin = new Meal();//same as lunch
         try {
             tiffin.setRating(0);
             tiffin.setName("tiffin");
@@ -61,9 +73,11 @@ public class Test1 {
         assertEquals(tiffin.getProteins(), 0, 0);
         assertEquals("tiffin", tiffin.getName());
         assertEquals("tiffin", tiffin.getType());
-
+    }
+    @Test
+    public void genMeal3(){
         badError = false;
-        Meal dinner = new Meal();
+        dinner = new Meal();
         try {
             dinner.setRating(0);
             dinner.setName("dinner");
@@ -85,9 +99,11 @@ public class Test1 {
         assertEquals(dinner.getProteins(), 0, 0);
         assertEquals("dinner", dinner.getName());
         assertEquals("dinner", dinner.getType());
-
+    }
+    @Test
+    public void genMeal4(){
         badError = false;
-        Meal anSnack = new Meal();
+        anSnack = new Meal();
         try {
             anSnack.setRating(0);
             anSnack.setName("anSnack");
@@ -109,9 +125,11 @@ public class Test1 {
         assertEquals(anSnack.getProteins(), 0, 0);
         assertEquals("anSnack", anSnack.getName());
         assertEquals("anSnack", anSnack.getType());
-
+    }
+    @Test
+    public void genMeal5(){
         badError = false;
-        Meal supper = new Meal();
+        supper = new Meal();
         try {
             supper.setRating(0);
             supper.setName("supper");
@@ -133,9 +151,11 @@ public class Test1 {
         assertEquals(supper.getProteins(), 0, 0);
         assertEquals("supper", supper.getName());
         assertEquals("supper", supper.getType());
-
+    }
+    @Test
+    public void genMeal6(){
         badError = false;
-        Meal snack = new Meal();
+        snack = new Meal();
         try {
             snack.setRating(0);
             snack.setName("snack");
@@ -157,6 +177,34 @@ public class Test1 {
         assertEquals(snack.getProteins(), 0, 0);
         assertEquals("snack", snack.getName());
         assertEquals("snack", snack.getType());
+    }
+
+    @Test
+    public void genMenu(){
+        Menu menu = new Menu(
+                breakfast,
+                tiffin,
+                dinner,
+                anSnack,
+                supper,
+                snack
+        );
+
+        assertEquals(menu.getBreakfast(), breakfast);
+        assertEquals(menu.getTiffin(), tiffin);
+        assertEquals(menu.getDinner(), dinner);
+        assertEquals(menu.getSupper(), supper);
+        assertEquals(menu.getSnack(), snack);
+    }
+
+    public  void testBase(){
+        Menu menu = new Menu(
+                DataBase.getInstance().getMeals().get(0),
+                DataBase.getInstance().getMeals().get(1),
+                DataBase.getInstance().getMeals().get(2),
+                DataBase.getInstance().getMeals().get(3),
+                DataBase.getInstance().getMeals().get(4),
+                DataBase.getInstance().getMeals().get(5));
 
         DataBase.getInstance("data.txt");
         DataBase.getInstance().addMeal(breakfast);
@@ -165,14 +213,6 @@ public class Test1 {
         DataBase.getInstance().addMeal(anSnack);
         DataBase.getInstance().addMeal(supper);
         DataBase.getInstance().addMeal(snack);
-
-        Menu menu = new Menu(
-                DataBase.getInstance().getMeals().get(0),
-                DataBase.getInstance().getMeals().get(1),
-                DataBase.getInstance().getMeals().get(2),
-                DataBase.getInstance().getMeals().get(3),
-                DataBase.getInstance().getMeals().get(4),
-                DataBase.getInstance().getMeals().get(5));
 
         assertEquals(DataBase.getInstance().getMeals().get(0), breakfast);
         assertEquals(DataBase.getInstance().getMeals().get(1), tiffin);
