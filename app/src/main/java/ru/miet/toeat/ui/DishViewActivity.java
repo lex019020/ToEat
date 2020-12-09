@@ -30,7 +30,7 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dish_view);
+        setContentView(R.layout.activity_meal_view);
 
         meal = (Meal) getIntent().getSerializableExtra("meal");
         setTitle(meal.getName());

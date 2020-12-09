@@ -1,4 +1,4 @@
-package ru.miet.toeat.ui.history;
+package ru.miet.toeat.ui.favorites;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,22 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import ru.miet.toeat.R;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.ui.DishViewActivity;
 
-public class MealHistoryAdapter extends ArrayAdapter<Meal> {
-    private List<Meal> meals;
+public class FavMealsAdapter extends ArrayAdapter<Meal> {
     private Context context;
+    private List<Meal> meals;
 
-    public MealHistoryAdapter(@NonNull Context context, int resource, @NonNull List<Meal> objects) {
+    public FavMealsAdapter(@NonNull Context context, int resource, @NonNull List<Meal> objects) {
         super(context, resource, objects);
-        meals = objects;
         this.context = context;
+        this.meals = objects;
     }
 
     @Nullable
@@ -41,25 +40,21 @@ public class MealHistoryAdapter extends ArrayAdapter<Meal> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Meal item = getItem(position);
 
-        if (convertView == null) {
+        if(convertView == null){
             convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.meal_history_view, null); // not sure for parent
+                    .inflate(R.layout.fav_meal_view, null);
         }
 
-        TextView tvDate = convertView.findViewById(R.id.tv_history_date);
-        TextView tvName = convertView.findViewById(R.id.tv_history_name);
-        LinearLayout ll = convertView.findViewById(R.id.ll_meal_history_element);
+        TextView tv = convertView.findViewById(R.id.tv_fav_meal_name);
+        LinearLayout ll = convertView.findViewById(R.id.ll_fav_meal);
 
-        SimpleDateFormat format = new SimpleDateFormat("EEEE, d MMMM  y", Locale.getDefault());
-        tvDate.setText(format.format(item.getDateOfLastDispense()));
-
-        tvName.setText(item.getName());
-
+        tv.setText(item.getName());
         ll.setOnClickListener(v ->{
             Intent intent = new Intent(context, DishViewActivity.class);
             intent.putExtra("meal", item);
             context.startActivity(intent);
         });
+
 
         return convertView;
     }

@@ -15,7 +15,7 @@ public class FavsFragStateAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if(position == 0){
-            return new FavDishesFragment();
+            return new FavMealsFragment();
         }
         else{
             return new FavIngridientsFragment();
