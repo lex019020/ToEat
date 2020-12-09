@@ -98,9 +98,9 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             today_menu.setBreakfast(new Meal());
             today_menu.getBreakfast().setName("Стейк из форели с картошкой");
             today_menu.getBreakfast().setIngredients(new ArrayList<>());
-            today_menu.getBreakfast().getIngredients().add(new Ingredient(250,
+            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
                     new Product("Форель", "-", 0), "рыба"));
-            today_menu.getBreakfast().getIngredients().add(new Ingredient(230,
+            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
                     new Product("Картофель свежий", "-", 1), "овощи"));
 
             today_menu.setTiffin(today_menu.getBreakfast());

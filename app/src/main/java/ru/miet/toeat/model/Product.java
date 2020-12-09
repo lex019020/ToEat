@@ -8,7 +8,6 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name = "noname";
-	private String description = "nodescription";
 	private int id = -1;
 
 	public Product() {
@@ -17,7 +16,6 @@ public class Product implements Serializable {
 	public Product(String name, String description, int id) throws FormatException {
 		super();
 		setName(name);
-		setDescription(description);
 		setId(id);
 	}
 
@@ -39,22 +37,10 @@ public class Product implements Serializable {
 		else
 			throw new FormatException("Wrong set id in Product");
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) throws FormatException {
-		if(Tools.isCorrectFormat(description, ""))
-			this.description = description;
-		else
-			throw new FormatException("Wrong set name in Product");
-	}
 
 	public boolean equals(Product compare){
 		boolean ret = true;
 		if(!name.equals(name)) {
-			ret = false;
-		}
-		if(!description.equals(description)) {
 			ret = false;
 		}
 		if(id != compare.id){
