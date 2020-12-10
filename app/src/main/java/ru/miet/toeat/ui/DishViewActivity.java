@@ -2,6 +2,7 @@ package ru.miet.toeat.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,7 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import java.text.DecimalFormat;
+import java.util.Locale;
+import java.util.Objects;
 
 import ru.miet.toeat.R;
 import ru.miet.toeat.model.Meal;
@@ -22,11 +30,17 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
 
     private RatingBar ratingBar;
     private ImageView iv_like;
+    private ImageView iv_pic;
     private Button recBtn;
     private Button ingBtn;
     private boolean is_fav;
     private Meal meal;
+    private TextView tv_prot;
+    private TextView tv_fat;
+    private TextView tv_carb;
+    private TextView tv_kcal;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,18 +48,35 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
 
         meal = (Meal) getIntent().getSerializableExtra("meal");
         setTitle(meal.getName());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         is_fav = false;
 
         iv_like = findViewById(R.id.iv_fav);
         recBtn = findViewById(R.id.btn_watch_recepie);
         ingBtn = findViewById(R.id.btn_watch_ingredients);
+        iv_pic = findViewById(R.id.iv_dish_pic);
+        tv_prot = findViewById(R.id.tv_prot);
+        tv_fat = findViewById(R.id.tv_fat);
+        tv_carb = findViewById(R.id.tv_carb);
+        tv_kcal = findViewById(R.id.tv_kcal);
 
 
         iv_like.setOnClickListener(this);
         recBtn.setOnClickListener(this);
         ingBtn.setOnClickListener(this);
+
+        if(isNetworkConnected()){
+            // TODO url
+            Picasso.get()
+                    .load("https://static.1000.menu/img/content/33497/steik-iz-foreli-na-skovorode_1553645260_1_max.jpg")
+                    .into(iv_pic);
+        }
+
+        tv_prot.setText("Б: " + new DecimalFormat("#.#").format(meal.getProteins()));
+        tv_carb.setText("У: " + new DecimalFormat("#.#").format(meal.getCarbs()));
+        tv_fat.setText("Ж: " + new DecimalFormat("#.#").format(meal.getFat()));
+        tv_kcal.setText("ККал: " + new DecimalFormat("#.#").format(meal.getCalories()));
     }
 
     @Override

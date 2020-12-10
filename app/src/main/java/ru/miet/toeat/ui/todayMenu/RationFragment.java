@@ -92,16 +92,19 @@ public class RationFragment extends Fragment implements View.OnClickListener {
 
     private void loadTodayMenu(){
         // TODO 111111111111111111111111111111111111111111111111111111111111
-        // Надо забить блюдами, похожими на правду, с полными данными и ингредиентами.
         try{
             today_menu = new Menu();
             today_menu.setBreakfast(new Meal());
-            today_menu.getBreakfast().setName("Стейк из форели с картошкой");
+            today_menu.getBreakfast().setName("Стейк из форели с рисом");
             today_menu.getBreakfast().setIngredients(new ArrayList<>());
             today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
                     new Product("Форель", 0), "рыба"));
             today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
-                    new Product("Картофель свежий", 1), "овощи"));
+                    new Product("рис", 1), "крупы"));
+            today_menu.getBreakfast().setProteins(15f);
+            today_menu.getBreakfast().setFat(25f);
+            today_menu.getBreakfast().setCarbs(6f);
+            today_menu.getBreakfast().setCalories(455f);
 
             today_menu.setTiffin(today_menu.getBreakfast());
             today_menu.setDinner(today_menu.getBreakfast());
@@ -110,7 +113,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             today_menu.setSnack(today_menu.getBreakfast());
         }
         catch (Throwable e){
-            //
+            e.printStackTrace();
         }
     }
 
