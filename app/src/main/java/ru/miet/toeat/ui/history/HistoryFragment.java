@@ -72,9 +72,9 @@ public class HistoryFragment extends Fragment {
             meal.updateDateOfLastDispense();
             meal.setIngredients(new ArrayList<>());
             meal.getIngredients().add(new Ingredient("250 грамм",
-                    new Product("Форель", "-", 0), "рыба"));
+                    new Product("Форель", 0), "рыба"));
             meal.getIngredients().add(new Ingredient("230 грамм",
-                    new Product("Картофель свежий", "-", 1), "овощи"));
+                    new Product("Картофель свежий", 1), "овощи"));
             for(int i = 0; i < 30; i++)
                 history.add(meal);
         }

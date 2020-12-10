@@ -3,8 +3,10 @@
     android:id="@+id/ll_ing_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:orientation="horizontal">
+    android:clickable="false"
+    android:longClickable="true"
+    android:orientation="horizontal"
+    android:background="?android:attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/text_view_name"
@@ -15,6 +17,7 @@
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:clickable="false"
+        android:longClickable="false"
         android:paddingLeft="10dp"
         android:textAlignment="textStart"
         android:textSize="24sp" />
@@ -29,6 +32,7 @@
         android:layout_marginBottom="8dp"
         android:layout_weight="0.5"
         android:clickable="false"
+        android:longClickable="false"
         android:paddingRight="10dp"
         android:textAlignment="textEnd"
         android:textSize="18sp" />

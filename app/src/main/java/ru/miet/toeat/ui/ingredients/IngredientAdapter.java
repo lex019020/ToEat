@@ -53,7 +53,7 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
 
         LinearLayout ll =  convertView.findViewById(R.id.ll_ing_view);
         // creating popup menu
-        ll.setOnClickListener(v -> {
+        ll.setOnLongClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(getContext(),v);
             popupMenu.inflate(R.menu.ingridient_add_fav_menu);
 
@@ -102,6 +102,7 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
                 }
             });
             popupMenu.show();
+            return false;
         });
 
         return convertView;

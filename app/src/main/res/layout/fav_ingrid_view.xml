@@ -8,7 +8,7 @@
     android:focusable="true">
 
     <LinearLayout
-        android:id="@+id/ll_fav_meal"
+        android:id="@+id/ll_fav_ingrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -18,7 +18,7 @@
         android:background="?android:attr/selectableItemBackground">
 
         <TextView
-            android:id="@+id/tv_fav_meal_name"
+            android:id="@+id/tv_fav_ingrid_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -28,14 +28,5 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="false"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_right_white"
-            tools:ignore="ContentDescription" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
