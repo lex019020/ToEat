@@ -6,25 +6,25 @@ import ru.miet.toeat.tools.Tools;
 public class Ingredient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private float amount = 0;
+	private String amount = "0";
 	private Product product = new Product();
 	private String category = "nocategory";
 
 	public Ingredient() {
 		super();
 	}
-	public Ingredient(float amount, Product product, String category) throws FormatException {
+	public Ingredient(String amount, Product product, String category) throws FormatException {
 		super();
 		setAmount(amount);
 		setProduct(product);
 		setCategory(category);
 	}
 
-	public float getAmount() {
+	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) throws FormatException {
-		if(Tools.isInRange(amount, 0, Float.MAX_VALUE))
+	public void setAmount(String amount) throws FormatException {
+		if(Tools.isCorrectFormat(amount, ""))
 			this.amount = amount;
 		else
 			throw new FormatException("Wrong set amount in Ingredient");
@@ -43,5 +43,18 @@ public class Ingredient implements Serializable {
 			this.category = category;
 		else
 			throw new FormatException("Wrong set category in Ingredient");
+	}
+	public boolean equals(Ingredient compare){
+		boolean ret = true;
+		if(amount != compare.amount){
+			ret = false;
+		}
+		if(!product.equals(compare.product)){
+			ret = false;
+		}
+		if(!category.equals(compare.category)){
+			ret = false;
+		}
+		return ret;
 	}
 }

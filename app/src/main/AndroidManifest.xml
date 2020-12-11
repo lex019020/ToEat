@@ -14,17 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToEat">
-        <activity android:name=".ui.ingredients.IngridientsActivity"></activity>
-        <activity android:name=".ui.RecepieActivity" />
+        <activity android:name=".ui.ingredients.IngridientsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.RecepieActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.DishViewActivity"
-            android:label="@string/title_activity_dish_view" />
-        <activity android:name=".ui.FirstSetupActivity" />
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.WelcomeActivity">
+            android:label="@string/title_activity_dish_view"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.FirstSetupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -83,4 +83,27 @@ public class Meal extends Nutrition{
 			}
 		}
 	}
+
+	public boolean equals(Meal compare){
+		boolean ret = true;
+		if(!name.equals(compare.name)) {
+			ret = false;
+		}
+		if(!ingredients.equals(compare.ingredients)){
+			ret = false;
+		}
+		if(!categories.equals(compare.categories)){
+			ret = false;
+		}
+		if(!type.equals(compare.type)){
+			ret = false;
+		}
+		if(rating != compare.rating){
+			ret = false;
+		}
+		if(!dateOfLastDispense.equals(compare.dateOfLastDispense)){
+			ret = false;
+		}
+		return ret;
+	}
 }

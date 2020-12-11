@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -16,7 +18,7 @@ import ru.miet.toeat.R;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
 
-public class IngridientsActivity extends AppCompatActivity {
+public class IngridientsActivity extends AppCompatActivity{
 
     private ArrayList<Ingredient> ingredients;
     @Override
@@ -43,4 +45,6 @@ public class IngridientsActivity extends AppCompatActivity {
     private void loadIngredients(){
         // TODO
     }
+
+
 }

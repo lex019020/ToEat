@@ -67,4 +67,27 @@ public class Menu extends Nutrition {
 	public void calcNutrition() {
 
 	}
+
+	public boolean equals(Menu compare){
+		boolean ret = true;
+		if(!breakfast.equals(compare.breakfast)) {
+			ret = false;
+		}
+		if(!tiffin.equals(compare.tiffin)){
+			ret = false;
+		}
+		if(!dinner.equals(compare.dinner)){
+			ret = false;
+		}
+		if(!anSnack.equals(compare.anSnack)){
+			ret = false;
+		}
+		if(supper != compare.supper){
+			ret = false;
+		}
+		if(!snack.equals(compare.snack)){
+			ret = false;
+		}
+		return ret;
+	}
 }

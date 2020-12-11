@@ -1,5 +1,8 @@
 package ru.miet.toeat.model;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 import ru.miet.toeat.tools.Tools;
@@ -8,16 +11,14 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name = "noname";
-	private String description = "nodescription";
 	private int id = -1;
 
 	public Product() {
 		super();
 	}
-	public Product(String name, String description, int id) throws FormatException {
+	public Product(String name, int id) throws FormatException {
 		super();
 		setName(name);
-		setDescription(description);
 		setId(id);
 	}
 
@@ -39,13 +40,28 @@ public class Product implements Serializable {
 		else
 			throw new FormatException("Wrong set id in Product");
 	}
-	public String getDescription() {
-		return description;
+
+	@Override
+	public boolean equals(@Nullable Object obj) {
+		if(!(obj instanceof Product))
+			return false;
+		return equals(obj);
 	}
-	public void setDescription(String description) throws FormatException {
-		if(Tools.isCorrectFormat(description, ""))
-			this.description = description;
-		else
-			throw new FormatException("Wrong set name in Product");
+
+	public boolean equals(Product compare){
+		boolean ret = true;
+		if(!name.equals(compare.name)) {
+			ret = false;
+		}
+		if(id != compare.id){
+			ret = false;
+		}
+		return ret;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return name;
 	}
 }
