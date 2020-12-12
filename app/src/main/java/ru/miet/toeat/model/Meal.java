@@ -14,6 +14,8 @@ public class Meal extends Nutrition{
 	private String type = "notype";
 	private float rating = 0;
 	private Date dateOfLastDispense = new Date();
+	private String image="";
+	private String link_to_recept="";
 
 	public Meal() {
 		super();
@@ -104,6 +106,20 @@ public class Meal extends Nutrition{
 		if(!dateOfLastDispense.equals(compare.dateOfLastDispense)){
 			ret = false;
 		}
+
 		return ret;
+	}
+
+	public String getLink_to_recept() {
+		return link_to_recept;
+	}
+	public void setLink_to_recept(String link_to_recept) {
+		this.link_to_recept = link_to_recept;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
