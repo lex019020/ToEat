@@ -36,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private boolean tryToLoadData(){
-        //TODO
+        //TODO Load DB and User here
         return true;
     }
 
@@ -47,7 +47,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void switchToSetupPage(){
-        //TODO
+        //TODO Delete this method maybe?
     }
 
 }
