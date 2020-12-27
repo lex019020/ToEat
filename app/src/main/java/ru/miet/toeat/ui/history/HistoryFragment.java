@@ -5,10 +5,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
+import ru.miet.toeat.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,10 @@ import ru.miet.toeat.R;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
+    LinearLayout ll;
+    TextView myText;
+    TextView myText1;
+    ArrayList<String> test = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +73,33 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
+
+        ll = (LinearLayout) view.findViewById(R.id.historyFragmentLinearLayout);
+
+        test.add("test1");
+        test.add("test2");
+
+        myText = new TextView(getActivity());
+        myText1 = new TextView(getActivity());
+        ll.addView(myText);
+        ll.addView(myText1);
+
+        myText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        for (int i=0; i<test.size();i++){
+            myText.append(test.get(i));
+            myText.append("\n");
+
+            myText1.append(test.get(i));
+            myText1.append("\n");
+        }
+
+        return view;
     }
 }
