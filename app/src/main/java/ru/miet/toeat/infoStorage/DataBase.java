@@ -46,9 +46,7 @@ public class DataBase implements Serializable{
         return base;
     }
     public static DataBase getInstance(String dbFilePath) {
-        if(base == null) {
-            base = new DataBase(dbFilePath);
-        }
+        base = new DataBase(dbFilePath);
         return base;
     }
 

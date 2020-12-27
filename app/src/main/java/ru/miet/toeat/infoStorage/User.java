@@ -1,5 +1,12 @@
 package ru.miet.toeat.infoStorage;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,13 +21,54 @@ import ru.miet.toeat.tools.Tools;
 public class User extends Nutrition {
 	private static final long serialVersionUID = 1L;
 
+	private static User user = null;
+
+	private User() {
+		super();
+	}
+	private User(String dataFilePath) throws FormatException{
+		super();
+		setDataFilePath(dataFilePath);
+	}
+	private User(String dataFilePath, String name,
+				 float weight, float height,
+				 boolean sex, Date birthDate,
+				 Lifestyle lifestyle) throws FormatException{
+		super();
+		setDataFilePath(dataFilePath);
+		setName(name);
+		setWeight(weight);
+		setHeight(height);
+		setSex(sex);
+		setBirthDate(birthDate);
+		setLifestyle(lifestyle);
+	}
+
+	public static User getInstance() {
+		if(user == null) {
+			user = new User();
+		}
+		return user;
+	}
+	public static User getInstance(String dataFilePath) throws FormatException {
+		user = new User(dataFilePath);
+		return user;
+	}
+	public static User getInstance(String dataFilePath, String name,
+								   float weight, float height,
+								   boolean sex, Date birthDate,
+								   Lifestyle lifestyle) throws FormatException {
+		user = new User(dataFilePath, name, weight, height, sex, birthDate, lifestyle);
+		return user;
+	}
+
 	//TODO: add more categories
 	public enum Lifestyle{
 		seat,
 		active,
 	}
 
-	String dataFilePath;
+	private String dataFilePath;
 
 	private String name = "noname";
 	private float weight = 0;
@@ -36,20 +84,6 @@ public class User extends Nutrition {
 	private ArrayList<Product> favorProducts = new ArrayList<>();
 	private ArrayList<Product> unfavorProducts = new ArrayList<>();
 	private ArrayList<Meal> mealHistory = new ArrayList<>();
-
-	public User(String userDataFilePath) {
-		super();
-		dataFilePath = userDataFilePath;
-	}
-	public User(String name, float weight, float height, boolean sex, Date birthDate, Lifestyle lifestyle) throws FormatException{
-		super();
-		setName(name);
-		setWeight(weight);
-		setHeight(height);
-		setSex(sex);
-		setBirthDate(birthDate);
-		setLifestyle(lifestyle);
-	}
 
 	public void addPreference(String c) {
 		preferences.add(c);
@@ -208,6 +242,12 @@ public class User extends Nutrition {
 	public void setMealHistory(ArrayList<Meal> mealHistory) {
 		this.mealHistory = mealHistory;
 	}
+	public String getDataFilePath() {
+		return dataFilePath;
+	}
+	public void setDataFilePath(String dataFilePath) {
+		this.dataFilePath = dataFilePath;
+	}
 
 	//TODO: implement this
 	public void genMenu() {
@@ -215,34 +255,37 @@ public class User extends Nutrition {
 	}
 
 	public void upload(){
-		Tools.file.serialize(dataFilePath,
-				name, weight, height, sex,
-				birthDate, lifestyle, menu, preferences,
-				favorMeals, unfavorMeals,
-				favorProducts, unfavorProducts,
-				mealHistory);
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataFilePath))){
+			oos.writeObject(user);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void load(){
-		ArrayList<Object> data = Tools.file.deserialize(dataFilePath);
-		name = (String)data.get(0);
-		weight = (float)data.get(1);
-		height = (float)data.get(2);
-		sex = (boolean)data.get(3);
+		File f = new File(dataFilePath);
+		if(f.exists() && !f.isDirectory()) {
+			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(f))) {
+				user = (User) in.readObject();
+			}
+			catch(EOFException e) {
 
-		birthDate = (Date)data.get(4);
-		lifestyle = (Lifestyle)data.get(5);
-		menu = (Menu)data.get(6);
-		preferences = (ArrayList<String>)data.get(7);
-
-		favorMeals = (ArrayList<Meal>)data.get(8);
-		unfavorMeals = (ArrayList<Meal>)data.get(9);
-
-		favorProducts = (ArrayList<Product>)data.get(10);
-		unfavorProducts = (ArrayList<Product>)data.get(11);
-
-		mealHistory = (ArrayList<Meal>)data.get(12);
+			}
+			catch(ClassNotFoundException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
+		}
+		else {
+			Tools.file.createFile(dataFilePath, "");
+		}
 	}
 }
 
