@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/add_fav_menuitem"
+        android:title="Добавить в избранное" />
+    <item
+        android:id="@+id/del_fav_menuitem"
+        android:title="Удалить из избранного" />
+    <item
+        android:id="@+id/add_unfav_menuitem"
+        android:title="Добавить в нелюбимое" />
+    <item
+        android:id="@+id/del_unfav_menuitem"
+        android:title="Удалить из нелюбимого" />
+</menu>

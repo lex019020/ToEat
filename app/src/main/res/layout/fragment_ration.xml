@@ -35,9 +35,10 @@
             android:id="@+id/lay_breakfast_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView
@@ -70,8 +71,7 @@
                 android:layout_weight="5"
                 android:clickable="false"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_right_white"
-                 />
+                android:src="@drawable/ic_right_white" />
 
         </LinearLayout>
 
@@ -79,9 +79,10 @@
             android:id="@+id/lay_tiffin_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView
@@ -122,9 +123,10 @@
             android:id="@+id/lay_dinner_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView
@@ -165,9 +167,10 @@
             android:id="@+id/lay_afternoon_snack_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -190,7 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView
@@ -208,9 +211,10 @@
             android:id="@+id/lay_supper_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -233,7 +237,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView
@@ -251,9 +255,10 @@
             android:id="@+id/lay_snack_element"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:orientation="horizontal"
-            android:focusable="true">
+            android:focusable="true"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -276,7 +281,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Творог с алюминиевой стружкой" />
+                    android:text="Стейк из форели с картошкой" />
             </LinearLayout>
 
             <ImageView

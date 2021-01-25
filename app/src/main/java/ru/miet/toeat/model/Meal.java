@@ -14,16 +14,19 @@ public class Meal extends Nutrition{
 	private String type = "notype";
 	private float rating = 0;
 	private Date dateOfLastDispense = new Date();
+	private String image="";
+	private String recipeURL = "nourl";
 
 	public Meal() {
 		super();
 	}
-	public Meal(String name, String type, float rating, Date dateOfLastDispense) throws FormatException {
+	public Meal(String name, String type, float rating, Date dateOfLastDispense, String recipeURL) throws FormatException {
 		super();
 		setName(name);
 		setType(type);
 		setRating(rating);
 		updateDateOfLastDispense();
+		setRecipeURL(recipeURL);
 	}
 
 	public String getName() {
@@ -82,5 +85,47 @@ public class Meal extends Nutrition{
 				categories.remove(c);
 			}
 		}
+	}
+	public String getRecipeURL() {
+		return recipeURL;
+	}
+	public void setRecipeURL(String recipeURL) throws FormatException {
+		if(Tools.isCorrectFormat(recipeURL, ""))
+			this.recipeURL = recipeURL;
+		else
+			throw new FormatException("Wrong set name in Meal");
+	}
+
+	public boolean equals(Meal compare){
+		boolean ret = true;
+		if(!name.equals(compare.name)) {
+			ret = false;
+		}
+		if(!ingredients.equals(compare.ingredients)){
+			ret = false;
+		}
+		if(!categories.equals(compare.categories)){
+			ret = false;
+		}
+		if(!type.equals(compare.type)){
+			ret = false;
+		}
+		if(rating != compare.rating){
+			ret = false;
+		}
+		if(!dateOfLastDispense.equals(compare.dateOfLastDispense)){
+			ret = false;
+		}
+		if(!recipeURL.equals(compare.recipeURL)) {
+			ret = false;
+		}
+		return ret;
+	}
+
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
