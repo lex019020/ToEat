@@ -92,15 +92,17 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
                 is_fav = !is_fav;
                 if(is_fav) {
                     iv_like.setImageResource(R.drawable.ic_favorite);
+                    setLiked(meal, true);
                 }
                 else {
                     iv_like.setImageResource(R.drawable.ic_favorite_empty);
+                    setLiked(meal, false);
                 }
                 break;
             case R.id.btn_watch_recepie:
                 if(isNetworkConnected()){
                     Intent intent = new Intent(DishViewActivity.this, RecepieActivity.class);
-                    intent.putExtra("url", meal.getLink_to_recept());
+                    intent.putExtra("url", meal.getRecipeURL());
                     startActivity(intent);
                 }
                 else {
@@ -122,6 +124,15 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
 
+    }
+
+    private void setLiked(Meal m, boolean isLiked){
+        if(isLiked){
+
+        }
+        else{
+
+        }
     }
 
     private boolean isNetworkConnected() {
