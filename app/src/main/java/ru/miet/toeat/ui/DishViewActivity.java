@@ -67,9 +67,8 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         ingBtn.setOnClickListener(this);
 
         if(isNetworkConnected()){
-            // TODO url
             Picasso.get()
-                    .load("https://static.1000.menu/img/content/33497/steik-iz-foreli-na-skovorode_1553645260_1_max.jpg")
+                    .load(meal.getImage())
                     .into(iv_pic);
         }
 
@@ -101,7 +100,7 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_watch_recepie:
                 if(isNetworkConnected()){
                     Intent intent = new Intent(DishViewActivity.this, RecepieActivity.class);
-                    intent.putExtra("url", "https://1000.menu/cooking/33497-steik-iz-foreli-na-skovorode"); // TODO get from DB
+                    intent.putExtra("url", meal.getLink_to_recept());
                     startActivity(intent);
                 }
                 else {
