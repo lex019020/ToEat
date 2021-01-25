@@ -1,9 +1,11 @@
 package ru.miet.toeat.tools;
 
 import java.io.*;
+import android.content.Context;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Tools
@@ -86,8 +88,9 @@ public class Tools
 		//method create a new file and write content in
 		public static void createFile(String path, String content) {
 			try {
-				FileWriter writer = new FileWriter(path);
-				writer.write(content);
+				FileOutputStream writer = new FileOutputStream( path, false);
+
+				writer.write(content.getBytes());
 				writer.close();
 			}
 			catch (IOException e) {
@@ -103,7 +106,7 @@ public class Tools
 			try {
 				File f = new File(path);
 				if(f.exists() && !f.isDirectory()) {
-					FileReader reader = new FileReader(f);
+					FileInputStream reader = new FileInputStream(f);
 					Scanner scan = new Scanner(reader);
 					while (scan.hasNextLine()) {
 						result += scan.nextLine() + "\n";
@@ -197,4 +200,5 @@ public class Tools
 		else
 			return (!string.equals("")) && (!string.contains(incorrectChars));
 	}
+
 }

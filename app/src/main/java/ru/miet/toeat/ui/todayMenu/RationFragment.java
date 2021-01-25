@@ -1,5 +1,6 @@
 package ru.miet.toeat.ui.todayMenu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import ru.miet.toeat.R;
@@ -23,6 +25,8 @@ import ru.miet.toeat.model.Product;
 import ru.miet.toeat.ui.DishViewActivity;
 
 
+@SuppressWarnings("FieldCanBeLocal")
+@SuppressLint("SetTextI18n")
 public class RationFragment extends Fragment implements View.OnClickListener {
 
 
@@ -36,6 +40,10 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     private TextView tv_aft_snack;
     private TextView tv_supper;
     private TextView tv_snack;
+    private TextView tv_carb;
+    private TextView tv_fat;
+    private TextView tv_prot;
+    private TextView tv_kcal;
 
     private LinearLayout lay_list;
     private LinearLayout lay_breakfast;
@@ -88,6 +96,27 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         // TODO
 
         loadTodayMenu();
+
+        updateTextViews();
+
+    }
+
+    private void updateTextViews() {
+        tv_breakfast.setText(today_menu.getBreakfast().getName());
+        tv_tiffin.setText(today_menu.getTiffin().getName());
+        tv_dinner.setText(today_menu.getDinner().getName());
+        tv_aft_snack.setText(today_menu.getAnSnack().getName());
+        tv_supper.setText(today_menu.getSupper().getName());
+        tv_snack.setText(today_menu.getSnack().getName());
+
+        tv_carb.setText("У: " + new DecimalFormat("#.#")
+                .format(today_menu.getCarbs()));
+        tv_fat.setText("Ж: " + new DecimalFormat("#.#")
+                .format(today_menu.getFat()));
+        tv_prot.setText("Б: " + new DecimalFormat("#.#")
+                .format(today_menu.getProteins()));
+        tv_kcal.setText("Ккал: " + new DecimalFormat("#.#")
+                .format(today_menu.getCalories()));
     }
 
     private void loadTodayMenu(){

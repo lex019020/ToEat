@@ -22,10 +22,13 @@ import java.util.Locale;
 import java.util.Objects;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
+import ru.miet.toeat.infoStorage.User;
+import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.ui.ingredients.IngridientsActivity;
 
-public class DishViewActivity extends AppCompatActivity implements View.OnClickListener {
+public class DishViewActivity extends AppCompatActivity implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
 
     private RatingBar ratingBar;
@@ -60,11 +63,13 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         tv_fat = findViewById(R.id.tv_fat);
         tv_carb = findViewById(R.id.tv_carb);
         tv_kcal = findViewById(R.id.tv_kcal);
+        ratingBar = findViewById(R.id.ratingBar);
 
 
         iv_like.setOnClickListener(this);
         recBtn.setOnClickListener(this);
         ingBtn.setOnClickListener(this);
+        ratingBar.setOnRatingBarChangeListener(this);
 
         if(isNetworkConnected()){
             Picasso.get()
@@ -76,6 +81,15 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         tv_carb.setText("У: " + new DecimalFormat("#.#").format(meal.getCarbs()));
         tv_fat.setText("Ж: " + new DecimalFormat("#.#").format(meal.getFat()));
         tv_kcal.setText("ККал: " + new DecimalFormat("#.#").format(meal.getCalories()));
+
+        if(User.getInstance().getFavorMeals().contains(meal)){
+            iv_like.setImageResource(R.drawable.ic_favorite);
+        }
+        else{
+            iv_like.setImageResource(R.drawable.ic_favorite_empty);
+        }
+
+        ratingBar.setRating(meal.getRating());
     }
 
     @Override
@@ -117,27 +131,56 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_watch_ingredients:
 
-                // TODO check zero ingredients
-                Intent intent = new Intent(DishViewActivity.this, IngridientsActivity.class);
-                intent.putExtra("meal", meal);
-                startActivity(intent);
+                if(meal.getIngredients().size() < 1){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Список ингридиентов пуст!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else {
+                    Intent intent = new Intent(DishViewActivity.this, IngridientsActivity.class);
+                    intent.putExtra("meal", meal);
+                    startActivity(intent);
+                }
                 break;
         }
 
     }
 
     private void setLiked(Meal m, boolean isLiked){
+        User user = User.getInstance();
         if(isLiked){
-
+            user.addFavorMeal(m);
         }
         else{
+            user.removeFavorMeal(m.getName());
+        }
+    }
 
+    private void setRating(Meal m, float rating){
+        DataBase db = DataBase.getInstance();
+        for (Meal x:
+             db.getMeals()) {
+            if(x.equals(m)){
+                try {
+                    x.setRating(rating);
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        setRating(meal, ratingBar.getRating());
     }
 }

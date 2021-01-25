@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Product;
 
@@ -58,7 +59,9 @@ public class FavIngridientsFragment extends Fragment {
 
     private void loadData(){
         products = new ArrayList<>();
-        // TODO implement
+        products = User.getInstance().getFavorProducts();
+
+        // FIXME for testing only
         try
         {
             Product p = new Product("маслины", 0);

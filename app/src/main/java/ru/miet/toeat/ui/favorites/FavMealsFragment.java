@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
@@ -58,8 +59,9 @@ public class FavMealsFragment extends Fragment {
 
     private void loadFavMeals(){
         meals = new ArrayList<>();
-        // TODO implement
+        meals = User.getInstance().getFavorMeals();
 
+        // FIXME for test purposes only
         try{
             Meal meal = new Meal();
             meal.setName("Стейк из форели с картошкой");
