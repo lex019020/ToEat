@@ -67,9 +67,19 @@ public class User extends Nutrition {
 
 	//TODO: add more categories
 	public enum Lifestyle{
-		seat,
-		active,
+		none,
+		small,
+		medium,
+		intensive,
+		max
 	}
+
+	public static String[] LifestyleStrings = {
+			"Сидячий",
+			"Подвижный",
+			"Активный",
+			"Спортивный",
+			"Максимальный"};
 
 	private String dataFilePath;
 
@@ -78,7 +88,7 @@ public class User extends Nutrition {
 	private float height = 0;
 	private boolean sex = false;
 	private Date birthDate = new Date();
-	private Lifestyle lifestyle = Lifestyle.active;
+	private Lifestyle lifestyle = Lifestyle.small;
 	private Menu menu = new Menu();
 
 	private ArrayList<String> preferences = new ArrayList<>();
