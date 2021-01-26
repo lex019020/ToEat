@@ -5,10 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
 
 import ru.miet.toeat.R;
@@ -56,5 +58,9 @@ public class SetupSecondFragment extends Fragment {
         np_activity.setMaxValue(User.LifestyleStrings.length - 1);
         np_activity.setDisplayedValues(User.LifestyleStrings);
         np_activity.setWrapSelectorWheel(true);
+
+        ((Button)view.findViewById(R.id.btn_next_2)).setOnClickListener((v)->{
+            Navigation.findNavController(view).navigate(R.id.action_setupSecondFragment_to_setupThree);
+        });
     }
 }
