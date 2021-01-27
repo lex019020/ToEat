@@ -93,7 +93,11 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         lay_snack.setOnClickListener(this);
         lay_supper.setOnClickListener(this);
         lay_tiffin.setOnClickListener(this);
-        // TODO
+
+        tv_prot  = getView().findViewById(R.id.tv_menu_prot);
+        tv_fat  = getView().findViewById(R.id.tv_menu_fat);
+        tv_carb  = getView().findViewById(R.id.tv_menu_carb);
+        tv_kcal  = getView().findViewById(R.id.tv_menu_kcal);
 
         loadTodayMenu();
 
@@ -117,6 +121,8 @@ public class RationFragment extends Fragment implements View.OnClickListener {
                 .format(today_menu.getProteins()));
         tv_kcal.setText("Ккал: " + new DecimalFormat("#.#")
                 .format(today_menu.getCalories()));
+
+
     }
 
     private void loadTodayMenu(){
@@ -140,6 +146,8 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             today_menu.setAnSnack(today_menu.getBreakfast());
             today_menu.setSupper(today_menu.getBreakfast());
             today_menu.setSnack(today_menu.getBreakfast());
+
+            today_menu.calcNutrition();
         }
         catch (Throwable e){
             e.printStackTrace();

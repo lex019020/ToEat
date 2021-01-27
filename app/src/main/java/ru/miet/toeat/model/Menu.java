@@ -65,7 +65,10 @@ public class Menu extends Nutrition {
 
 	//TODO: implement this
 	public void calcNutrition() {
-
+		proteins = 1;
+		fat = 1;
+		carbs = 1;
+		calories = 1;
 	}
 
 	public boolean equals(Menu compare){

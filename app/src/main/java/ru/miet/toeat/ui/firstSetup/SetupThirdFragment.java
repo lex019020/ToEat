@@ -15,6 +15,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.tools.Tools;
 
 public class SetupThirdFragment extends Fragment {
 
@@ -58,7 +59,7 @@ public class SetupThirdFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 p = seekBar.getProgress()+1;
-                tvProt.setText("Белки: " + String.valueOf(p).substring(0,String.valueOf(p).indexOf('.')));
+                tvProt.setText("Белки: " + Tools.removeAfterLastDot(String.valueOf(p)));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {            }
@@ -70,7 +71,7 @@ public class SetupThirdFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 f = seekBar.getProgress()+1;
-                tvFat.setText("Жиры: " + String.valueOf(f).substring(0,String.valueOf(f).indexOf('.')));
+                tvFat.setText("Жиры: " + Tools.removeAfterLastDot(String.valueOf(f)));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {            }
@@ -82,7 +83,7 @@ public class SetupThirdFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 c = seekBar.getProgress()+1;
-                tvCarb.setText("Углеводы: " + String.valueOf(c).substring(0,String.valueOf(c).indexOf('.')));
+                tvCarb.setText("Углеводы: " + Tools.removeAfterLastDot(String.valueOf(c)));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {            }

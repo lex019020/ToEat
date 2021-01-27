@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Meal;
+import ru.miet.toeat.tools.Tools;
 import ru.miet.toeat.ui.MainActivity;
 
 public class SetupLastFragment extends Fragment {
@@ -102,9 +104,17 @@ public class SetupLastFragment extends Fragment {
         tv_setup_finish_text3 = view.findViewById(R.id.tv_setup_finish_text3);
         tv_setup_finish_text4 = view.findViewById(R.id.tv_setup_finish_text4);
 
-        tv_setup_finish_text1.setText(name + ", " + (sex ? "М" : "Ж") + ", " + birth.toString());
-        tv_setup_finish_text2.setText(height + " / " + weight + " / " + User.getInstance().getLifestyle().getString(act));
-        tv_setup_finish_text3.setText(p + " / " + f + " / " + c);
+        tv_setup_finish_text1.setText(
+                        name + ", " + (sex ? "М" : "Ж") + ", " +
+                        new SimpleDateFormat("MM.dd.yyyy").format(birth));
+        tv_setup_finish_text2.setText(
+                        Tools.removeAfterLastDot(Float.toString(height)) + " / " +
+                        Tools.removeAfterLastDot(Float.toString(weight)) + " / " +
+                        User.getInstance().getLifestyle().getString(act));
+        tv_setup_finish_text3.setText(
+                        Tools.removeAfterLastDot(Float.toString(p)) + " / " +
+                        Tools.removeAfterLastDot(Float.toString(f)) + " / " +
+                        Tools.removeAfterLastDot(Float.toString(c)));
         tv_setup_finish_text4.setText(Float.toString(User.getInstance().getCalories()));
 
         ((Button)view.findViewById(R.id.btn_next_last)).setOnClickListener((v)->{

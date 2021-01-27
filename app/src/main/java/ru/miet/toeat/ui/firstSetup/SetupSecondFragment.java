@@ -64,6 +64,10 @@ public class SetupSecondFragment extends Fragment {
         np_activity.setWrapSelectorWheel(true);
 
         ((Button)view.findViewById(R.id.btn_next_2)).setOnClickListener((v)->{
+            height = np_height.getValue();
+            weight = np_weight.getValue();
+            act = np_activity.getValue();
+
             Bundle newB = new Bundle();
             newB.putAll(getArguments());
             newB.putFloat("height", height);

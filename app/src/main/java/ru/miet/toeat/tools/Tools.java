@@ -201,4 +201,7 @@ public class Tools
 			return (!string.equals("")) && (!string.contains(incorrectChars));
 	}
 
+	public static String removeAfterLastDot(String str){
+		return str.substring(0,str.indexOf('.'));
+	}
 }
