@@ -75,6 +75,7 @@
             android:text="Пол:" />
 
         <RadioGroup
+            android:id="@+id/sex_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -103,6 +104,7 @@
         android:id="@+id/btn_next_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="Далее"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
