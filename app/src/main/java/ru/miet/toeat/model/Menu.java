@@ -63,12 +63,22 @@ public class Menu extends Nutrition {
 		this.snack = snack;
 	}
 
-	//TODO: implement this
 	public void calcNutrition() {
-		proteins = 1;
-		fat = 1;
-		carbs = 1;
-		calories = 1;
+		proteins +=		getBreakfast().getProteins() + getTiffin().getProteins() +
+						getDinner().getProteins() +	getAnSnack().getProteins() +
+						getSupper().getProteins() + getSnack().getProteins();
+
+		fat +=			getBreakfast().getFat() + getTiffin().getFat() +
+						getDinner().getFat() +	getAnSnack().getFat() +
+						getSupper().getFat() + getSnack().getFat();
+
+		carbs +=		getBreakfast().getCarbs() + getTiffin().getCarbs() +
+						getDinner().getCarbs() +	getAnSnack().getCarbs() +
+						getSupper().getCarbs() + getSnack().getCarbs();
+
+		calories +=		getBreakfast().getCalories() + getTiffin().getCalories() +
+						getDinner().getCalories() +	getAnSnack().getCalories() +
+						getSupper().getCalories() + getSnack().getCalories();
 	}
 
 	public boolean equals(Menu compare){
