@@ -11,12 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import java.util.Date;
+
 import ru.miet.toeat.R;
 
 
 public class SetupFirstFragment extends Fragment {
 
-
+    Bundle bundle = new Bundle();
+    String name = "";
+    Date birth = new Date(); // запрашивать через datepickerdialog, накинуть туда ограничения
+    Boolean sex = false;     // не забыть держать кнопку next_1 disabled, пока значения не корректны
 
 
     public SetupFirstFragment() {
@@ -42,7 +47,10 @@ public class SetupFirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ((Button)view.findViewById(R.id.btn_next_1)).setOnClickListener((v)->{
-            Navigation.findNavController(view).navigate(R.id.action_setupFirstFragment_to_setupSecondFragment);
+            bundle.putString("name", name);
+            bundle.putSerializable("birth", birth);
+            bundle.putBoolean("sex", sex);
+            Navigation.findNavController(view).navigate(R.id.action_setupFirstFragment_to_setupSecondFragment, bundle);
         });
     }
 }

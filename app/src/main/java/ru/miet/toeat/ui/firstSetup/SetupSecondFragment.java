@@ -18,6 +18,10 @@ import ru.miet.toeat.infoStorage.User;
 
 public class SetupSecondFragment extends Fragment {
 
+    float height = 170;
+    float weight = 70;
+    int act = 0; // activity type
+
     public SetupSecondFragment() {
         // Required empty public constructor
     }
@@ -60,7 +64,12 @@ public class SetupSecondFragment extends Fragment {
         np_activity.setWrapSelectorWheel(true);
 
         ((Button)view.findViewById(R.id.btn_next_2)).setOnClickListener((v)->{
-            Navigation.findNavController(view).navigate(R.id.action_setupSecondFragment_to_setupThree);
+            Bundle newB = new Bundle();
+            newB.putAll(getArguments());
+            newB.putFloat("height", height);
+            newB.putFloat("weight", weight);
+            newB.putInt("act", act);
+            Navigation.findNavController(view).navigate(R.id.action_setupSecondFragment_to_setupThree, newB);
         });
     }
 }

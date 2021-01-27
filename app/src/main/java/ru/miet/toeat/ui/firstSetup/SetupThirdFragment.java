@@ -16,6 +16,9 @@ import ru.miet.toeat.R;
 
 public class SetupThirdFragment extends Fragment {
 
+    float p = 1; // prot
+    float f = 3; // fat
+    float c = 5; // carb
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,12 @@ public class SetupThirdFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ((Button)view.findViewById(R.id.btn_next_3)).setOnClickListener((v)->{
-            Navigation.findNavController(view).navigate(R.id.action_setupThree_to_setupLast);
+            Bundle bundle = new Bundle();
+            bundle.putAll(getArguments());
+            bundle.putFloat("p", p);
+            bundle.putFloat("f", f);
+            bundle.putFloat("c", c);
+            Navigation.findNavController(view).navigate(R.id.action_setupThree_to_setupLast, bundle);
         });
     }
 }

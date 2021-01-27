@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Ваше имя" />
+            android:hint="Ваше имя"/>
 
         <TextView
             android:id="@+id/textView9"

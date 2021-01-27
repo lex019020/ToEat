@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorites.FavMealsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tv_no_fav_meals"
         android:layout_width="wrap_content"

@@ -10,9 +10,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Meal;
@@ -20,6 +23,10 @@ import ru.miet.toeat.model.Menu;
 import ru.miet.toeat.model.Nutrition;
 import ru.miet.toeat.model.Product;
 import ru.miet.toeat.tools.Tools;
+
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class User extends Nutrition {
 	private static final long serialVersionUID = 1L;
@@ -65,13 +72,21 @@ public class User extends Nutrition {
 		return user;
 	}
 
-	//TODO: add more categories
 	public enum Lifestyle{
-		none,
-		small,
-		medium,
-		intensive,
-		max
+		none(0),
+		small(1),
+		medium(2),
+		intensive(3),
+		max(4);
+
+		private final int value;
+		private Lifestyle(int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
 	}
 
 	public static String[] LifestyleStrings = {
@@ -80,6 +95,14 @@ public class User extends Nutrition {
 			"Активный",
 			"Спортивный",
 			"Максимальный"};
+
+	public static float[] LifestyleCoefficients = {
+			1.2f,
+			1.38f,
+			1.46f,
+			1.64f,
+			1.9f
+	};
 
 	private String dataFilePath;
 
@@ -181,7 +204,7 @@ public class User extends Nutrition {
 		return height;
 	}
 	public void setHeight(float height) throws FormatException {
-		if(Tools.isInRange(height, 0, 3))
+		if(Tools.isInRange(height, 0, 300))
 			this.height = height;
 		else
 			throw new FormatException("Wrong set height in User");
@@ -199,7 +222,7 @@ public class User extends Nutrition {
 		Date currDate = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(currDate);
-		cal.add(Calendar.YEAR, -100);
+		cal.add(YEAR, -100);
 		Date dateBefore100Years = cal.getTime();
 
 		if(Tools.isInRange(birthDate, dateBefore100Years, currDate))
@@ -299,6 +322,47 @@ public class User extends Nutrition {
 		else {
 			Tools.file.createFile(dataFilePath, "");
 		}
+	}
+
+	public boolean calculateCalories(){
+		int years = getDiffYears(birthDate, new Date());
+
+		if(weight < 30 || height < 120 || years < 10)
+			return false;
+
+		float kcal = weight*10f + height*6.25f - years*5f;
+		if(sex)
+			kcal += 5;
+		else
+			kcal -= 161;
+
+		kcal *= LifestyleCoefficients[getLifestyle().getValue()];
+
+		try {
+			setCalories(kcal);
+		} catch (FormatException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
+	public static int getDiffYears(Date first, Date last) {
+		Calendar a = getCalendar(first);
+		Calendar b = getCalendar(last);
+		int diff = b.get(YEAR) - a.get(YEAR);
+		if (a.get(MONTH) > b.get(MONTH) ||
+				(a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
+			diff--;
+		}
+		return diff;
+	}
+
+	public static Calendar getCalendar(Date date) {
+		Calendar cal = Calendar.getInstance(Locale.US);
+		cal.setTime(date);
+		return cal;
 	}
 }
 
