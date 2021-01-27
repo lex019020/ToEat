@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import ru.miet.toeat.R;
 
@@ -19,6 +21,14 @@ public class SetupThirdFragment extends Fragment {
     float p = 1; // prot
     float f = 3; // fat
     float c = 5; // carb
+
+    SeekBar sbProt;
+    SeekBar sbFat;
+    SeekBar sbCarb;
+
+    TextView tvProt;
+    TextView tvFat;
+    TextView tvCarb;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,50 @@ public class SetupThirdFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sbProt = view.findViewById(R.id.sb_prot);
+        sbFat = view.findViewById(R.id.sb_fat);
+        sbCarb = view.findViewById(R.id.sb_carb);
+
+        tvProt = view.findViewById(R.id.tv_setup_prot);
+        tvFat = view.findViewById(R.id.tv_setup_fat);
+        tvCarb = view.findViewById(R.id.tv_setup_carbs);
+
+        sbProt.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                p = seekBar.getProgress()+1;
+                tvProt.setText("Белки: " + String.valueOf(p).substring(0,String.valueOf(p).indexOf('.')));
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {            }
+        });
+
+        sbFat.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                f = seekBar.getProgress()+1;
+                tvFat.setText("Жиры: " + String.valueOf(f).substring(0,String.valueOf(f).indexOf('.')));
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {            }
+        });
+
+        sbCarb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                c = seekBar.getProgress()+1;
+                tvCarb.setText("Углеводы: " + String.valueOf(c).substring(0,String.valueOf(c).indexOf('.')));
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {            }
+        });
 
         ((Button)view.findViewById(R.id.btn_next_3)).setOnClickListener((v)->{
             Bundle bundle = new Bundle();

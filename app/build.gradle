@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "21.0.1"
 
     defaultConfig {
         applicationId "ru.miet.toeat"

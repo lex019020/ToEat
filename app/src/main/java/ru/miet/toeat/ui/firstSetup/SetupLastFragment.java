@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -37,6 +38,13 @@ public class SetupLastFragment extends Fragment {
     float f; // fat
     float c; // carb
     float kcal;
+
+    User user = User.getInstance();
+
+    TextView tv_setup_finish_text1;
+    TextView tv_setup_finish_text2;
+    TextView tv_setup_finish_text3;
+    TextView tv_setup_finish_text4;
 
     public SetupLastFragment() {
         // Required empty public constructor
@@ -70,14 +78,35 @@ public class SetupLastFragment extends Fragment {
             p = bundle.getFloat("p");
             f = bundle.getFloat("f");
             c = bundle.getFloat("c");
-            // todo etc
 
+            user.setBirthDate(birth);
+            user.setHeight(height);
+            user.setLifestyle(User.Lifestyle.values()[act]);
+            user.setName(name);
+            user.setSex(sex);
+            user.setWeight(weight);
+            user.setCarbs(c);
+            user.setFat(f);
+            user.setProteins(p);
+            if(!user.calculateCalories())
+                throw new FormatException("bad calculation");
         }
         catch (Exception e){
             e.printStackTrace();
             //todo message
             Navigation.findNavController(view).popBackStack(R.id.setupZeroFragment, false);
         }
+
+        tv_setup_finish_text1 = view.findViewById(R.id.tv_setup_finish_text1);
+        tv_setup_finish_text2 = view.findViewById(R.id.tv_setup_finish_text2);
+        tv_setup_finish_text3 = view.findViewById(R.id.tv_setup_finish_text3);
+        tv_setup_finish_text4 = view.findViewById(R.id.tv_setup_finish_text4);
+
+        tv_setup_finish_text1.setText(name + ", " + (sex ? "М" : "Ж") + ", " + birth.toString());
+        tv_setup_finish_text2.setText(height + " / " + weight + " / " + User.getInstance().getLifestyle().getString(act));
+        tv_setup_finish_text3.setText(p + " / " + f + " / " + c);
+        tv_setup_finish_text4.setText(Float.toString(User.getInstance().getCalories()));
+
         ((Button)view.findViewById(R.id.btn_next_last)).setOnClickListener((v)->{
             initDatabaseAndGo();
         });
@@ -95,28 +124,9 @@ public class SetupLastFragment extends Fragment {
             return;
         }
 
-        User user = User.getInstance();
         DataBase dataBase = DataBase.getInstance();
 
         dataBase.setMeals(list);
-
-        try {
-
-            user.setBirthDate(birth);
-            user.setHeight(height);
-            user.setLifestyle(User.Lifestyle.values()[act]);
-            user.setName(name);
-            user.setSex(sex);
-            user.setWeight(weight);
-            user.setCarbs(c);
-            user.setFat(f);
-            user.setProteins(p);
-            if(!user.calculateCalories())
-                throw new FormatException("bad calculation");
-        } catch (Exception e) {
-            e.printStackTrace();
-            // todo error
-        }
 
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

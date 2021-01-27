@@ -87,6 +87,11 @@ public class User extends Nutrition {
 		public int getValue() {
 			return value;
 		}
+		public String getString(int value){
+			if(LifestyleStrings.length > value)
+				return LifestyleStrings[value];
+			return "Wrong";
+		}
 	}
 
 	public static String[] LifestyleStrings = {
