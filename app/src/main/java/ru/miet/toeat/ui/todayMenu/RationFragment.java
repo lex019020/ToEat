@@ -159,23 +159,11 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             // new menu
             // TODO start generation
             try{
-                today_menu = new Menu();
-                Random rand = new Random();
-                Meal meal1 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-                Meal meal2 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-                Meal meal3 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-                Meal meal4 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-                Meal meal5 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-                Meal meal6 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Menu menu = new Menu();
+                menu = user.genRandMenu();
 
-                today_menu.setBreakfast(meal6);
-                today_menu.setTiffin(meal1);
-                today_menu.setDinner(meal2);
-                today_menu.setAnSnack(meal3);
-                today_menu.setSupper(meal4);
-                today_menu.setSnack(meal5);
-
-                today_menu.calcNutrition();
+                menu.calcNutrition();
+                user.setMenu(menu);
             }
             catch (Throwable e){
                 e.printStackTrace();
