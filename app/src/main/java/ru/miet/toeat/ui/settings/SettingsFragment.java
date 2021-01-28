@@ -183,45 +183,46 @@ public class SettingsFragment extends Fragment {
         });
 
         imageView37.setOnClickListener(v -> {
-            NumberPickerDialog npd = new NumberPickerDialog(
+            NumberPickerDialog npd3 = new NumberPickerDialog( // carb
+                (int)User.getInstance().getCarbs(), 1, 10,
+                "Углеводы", "Выберите пропорцию углеводов");
+            npd3.setOnOkFunction(() -> {
+                try {
+                    User.getInstance().setCarbs(npd3.getCurrentValue());
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+                updateTextViews();
+            });
+            npd3.show(getParentFragmentManager(), "picker");
+
+
+            NumberPickerDialog npd2 = new NumberPickerDialog( // fat
+                    (int)User.getInstance().getFat(), 1, 10,
+                    "Жиры", "Выберите пропорцию жиров");
+            npd2.setOnOkFunction(() -> {
+                try {
+                    User.getInstance().setFat(npd2.getCurrentValue());
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+                updateTextViews();
+            });
+            npd2.show(getParentFragmentManager(), "picker");
+
+
+            NumberPickerDialog npd1 = new NumberPickerDialog(
                     (int)User.getInstance().getProteins(), 1, 10,
                     "Белки" , "Выберите пропорцию белков");// prot
-            NumberPickerDialog finalNpd = npd;
-            npd.setOnOkFunction(() -> {
+            npd1.setOnOkFunction(() -> {
                 try {
-                    User.getInstance().setProteins(finalNpd.getCurrentValue());
+                    User.getInstance().setProteins(npd1.getCurrentValue());
                 } catch (FormatException e) {
                     e.printStackTrace();
                 }
+                updateTextViews();
             });
-            finalNpd.show(getParentFragmentManager(), "picker");
-
-            npd = new NumberPickerDialog( // fat
-                    (int)User.getInstance().getProteins(), 1, 10,
-                    "Жиры", "Выберите пропорцию жиров");
-            NumberPickerDialog finalNpd1 = npd;
-            npd.setOnOkFunction(() -> {
-                try {
-                    User.getInstance().setProteins(finalNpd1.getCurrentValue());
-                } catch (FormatException e) {
-                    e.printStackTrace();
-                }
-            });
-            finalNpd1.show(getParentFragmentManager(), "picker");
-
-
-            npd = new NumberPickerDialog( // carb
-                    (int)User.getInstance().getProteins(), 1, 10,
-                    "Углеводы", "Выберите пропорцию углеводов");
-            NumberPickerDialog finalNpd2 = npd;
-            npd.setOnOkFunction(() -> {
-                try {
-                    User.getInstance().setProteins(finalNpd2.getCurrentValue());
-                } catch (FormatException e) {
-                    e.printStackTrace();
-                }
-            });
-            finalNpd2.show(getParentFragmentManager(), "picker");
+            npd1.show(getParentFragmentManager(), "picker");
 
             updateTextViews();
         });
@@ -241,7 +242,7 @@ public class SettingsFragment extends Fragment {
         tv_settings_lifestyle.setText(
                 User.getInstance().getLifestyle().getString(
                         User.getInstance().getLifestyle().getValue()));
-        tv_settings_sex.setText("" + user.getProteins()
-        + " / " + user.getFat() + " / " + user.getCarbs());
+        tv_settings_pfc.setText("" + (int)user.getProteins()
+        + " / " + (int)user.getFat() + " / " + (int)user.getCarbs());
     }
 }
