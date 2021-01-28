@@ -19,17 +19,23 @@ public class NumberPickerDialog extends DialogFragment {
     private int maxValue;
     private String[] displayedStrings;
     private Runnable onOk;
+    private String fieldName;
+    private String message;
 
-    public NumberPickerDialog(int value, int minValue, int maxValue){
+    public NumberPickerDialog(int value, int minValue, int maxValue, String fieldName, String message){
         this.value = value;
         this.minValue = minValue;
         this.maxValue = maxValue;
+        this.fieldName = fieldName;
+        this.message = message;
     }
-    public NumberPickerDialog(int value, int minValue, int maxValue, String[] displayedStrings){
+    public NumberPickerDialog(int value, int minValue, int maxValue, String[] displayedStrings, String fieldName, String message){
         this.value = value;
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.displayedStrings = displayedStrings;
+        this.fieldName = fieldName;
+        this.message = message;
     }
 
     @Override
@@ -44,8 +50,8 @@ public class NumberPickerDialog extends DialogFragment {
         numberPicker.setWrapSelectorWheel(true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Choose Value");
-        builder.setMessage("Choose a number :");
+        builder.setTitle(fieldName);
+        builder.setMessage(message);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

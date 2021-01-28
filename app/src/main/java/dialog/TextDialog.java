@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
+
 import androidx.fragment.app.DialogFragment;
 
 public class TextDialog extends DialogFragment {

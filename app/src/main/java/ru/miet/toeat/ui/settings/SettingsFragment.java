@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 
 import dialog.NumberPickerDialog;
 import dialog.TextDialog;
@@ -26,6 +29,13 @@ public class SettingsFragment extends Fragment {
     ImageView imageView36;
     ImageView imageView37;
 
+    private TextView tv_settings_name;
+    private TextView tv_settings_sex;
+    private TextView tv_settings_age;
+    private TextView tv_settings_height;
+    private TextView tv_settings_weight;
+    private TextView tv_settings_lifestyle;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -39,8 +49,14 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        tv_settings_name = view.findViewById(R.id.tv_settings_name);
+        tv_settings_sex = view.findViewById(R.id.tv_settings_sex);
+        tv_settings_age = view.findViewById(R.id.tv_settings_age);
+        tv_settings_height = view.findViewById(R.id.tv_settings_height);
+        tv_settings_weight = view.findViewById(R.id.tv_settings_weight);
+        tv_settings_lifestyle = view.findViewById(R.id.tv_settings_lifestyle);
 
         imageView3 = view.findViewById(R.id.imageView3);
         imageView32 = view.findViewById(R.id.imageView32);
@@ -49,6 +65,13 @@ public class SettingsFragment extends Fragment {
         imageView35 = view.findViewById(R.id.imageView35);
         imageView36 = view.findViewById(R.id.imageView36);
         imageView37 = view.findViewById(R.id.imageView37);
+
+        tv_settings_name.setText(User.getInstance().getName());
+        tv_settings_sex.setText(User.getInstance().isSex() ? "Мужской" : "Женский");
+        tv_settings_age.setText(new SimpleDateFormat("MM.dd.yyyy").format(User.getInstance().getBirthDate()));
+        tv_settings_height.setText((int) User.getInstance().getHeight() + "");
+        tv_settings_weight.setText((int) User.getInstance().getWeight() + "");
+        tv_settings_lifestyle.setText(User.getInstance().getLifestyle().getString(User.getInstance().getLifestyle().getValue()));
 
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +82,7 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
+                            tv_settings_name.setText(td.getCurrentValue());
                             User.getInstance().setName(td.getCurrentValue());
                         } catch (FormatException e) {
                             e.printStackTrace();
@@ -72,11 +96,12 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String[] sex = {"М","Ж"};
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,1,sex);
+                NumberPickerDialog npd = new NumberPickerDialog(0,0,1,sex, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-                         User.getInstance().setSex(npd.getCurrentValue() != 0);
+                        tv_settings_sex.setText(npd.getCurrentValue() == 0 ? "Мужской" : "Женский");
+                        User.getInstance().setSex(npd.getCurrentValue() == 0);
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
@@ -86,7 +111,7 @@ public class SettingsFragment extends Fragment {
         imageView33.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,0);
+                NumberPickerDialog npd = new NumberPickerDialog(0,0,0, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -100,11 +125,17 @@ public class SettingsFragment extends Fragment {
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(170, 120, 220);
+                NumberPickerDialog npd = new NumberPickerDialog(170, 120, 220, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-
+                        int v = npd.getCurrentValue();
+                        tv_settings_height.setText(npd.getCurrentValue() + "");
+                        try {
+                            User.getInstance().setHeight(npd.getCurrentValue());
+                        } catch (FormatException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
@@ -114,11 +145,16 @@ public class SettingsFragment extends Fragment {
         imageView35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(70,30,250);
+                NumberPickerDialog npd = new NumberPickerDialog(70,30,250, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-
+                        tv_settings_weight.setText(npd.getCurrentValue() + "");
+                        try {
+                            User.getInstance().setWeight(npd.getCurrentValue());
+                        } catch (FormatException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
@@ -130,11 +166,12 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 NumberPickerDialog npd = new NumberPickerDialog(
                         0, 0,
-                        User.LifestyleStrings.length - 1, User.LifestyleStrings);
+                        User.LifestyleStrings.length - 1, User.LifestyleStrings, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-
+                        tv_settings_lifestyle.setText(User.getInstance().getLifestyle().getString(npd.getCurrentValue()));
+                        User.getInstance().setLifestyle(User.Lifestyle.values()[npd.getCurrentValue()]);
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
