@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,7 +68,9 @@ public class SetupFirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        name=((EditText)view.findViewById(R.id.et_setup_name)).getText().toString();
+        EditText editname=((EditText)view.findViewById(R.id.et_setup_name));
+        name=editname.getText().toString();
+
         Button btn_birth=  ((Button)view.findViewById(R.id.btn_replace_some2));
         Button next=  ((Button)view.findViewById(R.id.btn_next_1));
         btn_birth.setText(df.format(ch_birth.getTime()));
@@ -89,10 +92,20 @@ public class SetupFirstFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 name=((EditText)view.findViewById(R.id.et_setup_name)).getText().toString();
-                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10 && name.length()>0 && name.length()<30 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<110){
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10 && name.length()>0 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<110){
                     next.setEnabled(true);
 
-                } else next.setEnabled(false);
+                } else{
+                    next.setEnabled(false);
+                    if(name.length()==0) {
+                    Context context = getActivity().getApplicationContext();
+                    CharSequence text = "Имя пустое!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                }
             }
 
             @Override
@@ -120,9 +133,19 @@ public class SetupFirstFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 ch_birth.set(year, month, dayOfMonth);
                 btn_birth.setText(df.format(ch_birth.getTime()));
-                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10 && name.length()>0 && name.length()<30 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<110){
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>=10 && name.length()>0 && name.length()<30 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<100){
                     next.setEnabled(true);
-                } else next.setEnabled(false);
+                } else{
+                    next.setEnabled(false);
+                    if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<10 || (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>100) {
+                        Context context = getActivity().getApplicationContext();
+                        CharSequence text = "Вы не подходите по возрасту, для пользования нашим приложением!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }
             }
         };
 
