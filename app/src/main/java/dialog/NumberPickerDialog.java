@@ -54,7 +54,7 @@ public class NumberPickerDialog extends DialogFragment {
             }
         });
 
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -67,6 +67,9 @@ public class NumberPickerDialog extends DialogFragment {
 
     public void setOnOkFunction(Runnable r){
         onOk = r;
+    }
+    public int getCurrentValue(){
+        return numberPicker.getValue();
     }
 }
 

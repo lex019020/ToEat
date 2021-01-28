@@ -12,13 +12,19 @@ import androidx.fragment.app.DialogFragment;
 public class TextDialog extends DialogFragment {
     private NumberPicker.OnValueChangeListener valueChangeListener;
     private Runnable onOk;
+    private EditText input;
+    private String fieldName;
+
+    public TextDialog(String fieldName){
+        this.fieldName = fieldName;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Title");
+        builder.setTitle(fieldName);
 
-        final EditText input = new EditText(getActivity());
+        input = new EditText(getActivity());
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         builder.setView(input);
 
@@ -29,7 +35,7 @@ public class TextDialog extends DialogFragment {
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -40,5 +46,8 @@ public class TextDialog extends DialogFragment {
 
     public void setOnOkFunction(Runnable r){
         onOk = r;
+    }
+    public String getCurrentValue(){
+        return String.valueOf(input.getText());
     }
 }
