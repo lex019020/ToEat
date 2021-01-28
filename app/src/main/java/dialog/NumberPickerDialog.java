@@ -42,9 +42,9 @@ public class NumberPickerDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         numberPicker = new NumberPicker(getActivity());
 
-        numberPicker.setValue(value);
         numberPicker.setMaxValue(maxValue);
         numberPicker.setMinValue(minValue);
+        numberPicker.setValue(value);
         if(displayedStrings != null)
             numberPicker.setDisplayedValues(displayedStrings);
         numberPicker.setWrapSelectorWheel(true);
@@ -76,6 +76,10 @@ public class NumberPickerDialog extends DialogFragment {
     }
     public int getCurrentValue(){
         return numberPicker.getValue();
+    }
+    public void setDefaultValue(int value){
+        this.value = value;
+        //numberPicker.setValue(value);
     }
 }
 
