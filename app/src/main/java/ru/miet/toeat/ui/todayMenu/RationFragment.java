@@ -180,7 +180,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         Menu menu = null;
         // new menu
         try{
-            menu = user.genNewMenu();
+            menu = user.genMenu();
 
             menu.calcNutrition();
             menu.updateDates();
@@ -202,7 +202,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
 
     private void putMenuAside(){
         User user = User.getInstance();
-        // todo call -20 days here
+        today_menu.substract20Days();
         today_menu = getNew_menu();
         user.setMenu(today_menu);
         updateTextViews();
