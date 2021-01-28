@@ -1,4 +1,4 @@
-package dialog;
+package ru.miet.toeat.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.widget.NumberPicker;
 
 import androidx.fragment.app.DialogFragment;
-
-import ru.miet.toeat.infoStorage.User;
 
 public class NumberPickerDialog extends DialogFragment {
     private NumberPicker.OnValueChangeListener valueChangeListener;

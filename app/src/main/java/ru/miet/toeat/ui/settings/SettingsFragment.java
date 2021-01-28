@@ -1,5 +1,10 @@
 package ru.miet.toeat.ui.settings;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,14 +12,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import dialog.NumberPickerDialog;
-import dialog.TextDialog;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import ru.miet.toeat.dialog.NumberPickerDialog;
+import ru.miet.toeat.dialog.TextDialog;
 import ru.miet.toeat.R;
 import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
-import ru.miet.toeat.tools.Tools;
 
 
 public class SettingsFragment extends Fragment {
@@ -24,6 +35,10 @@ public class SettingsFragment extends Fragment {
     ImageView imageView34;
     ImageView imageView35;
     ImageView imageView36;
+
+    GregorianCalendar ch_birth = new GregorianCalendar();
+    DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+    private DatePickerDialog.OnDateSetListener  dateListener;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -73,25 +88,42 @@ public class SettingsFragment extends Fragment {
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-                         User.getInstance().setSex(npd.getCurrentValue() != 0);
+                        User.getInstance().setSex(npd.getCurrentValue() != 0);
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
             }
         });
-        imageView33.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,0);
-                npd.setOnOkFunction(new Runnable() {
-                    @Override
-                    public void run() {
+        imageView33.setOnClickListener(v -> {
+            int year = ch_birth.get(Calendar.YEAR);
+            int month = ch_birth.get(Calendar.MONTH);
+            int day = ch_birth.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                    AlertDialog.THEME_HOLO_DARK, dateListener, year, month, day);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        });
 
+        dateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                ch_birth.set(year, month, dayOfMonth);
+
+                    if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<10 || (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>100) {
+                        Context context = getActivity().getApplicationContext();
+                        CharSequence text = "Вы не подходите по возрасту, для пользования нашим приложением!";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    } else{
+                        try {
+                            User.getInstance().setBirthDate(ch_birth.getTime());
+                        } catch (FormatException e) {
+                            e.printStackTrace();
+                        }
                     }
-                });
-                npd.show(getParentFragmentManager(), "picker");
-            }
-        });
+                }
+        };
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,4 +1,4 @@
-package dialog;
+package ru.miet.toeat.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
