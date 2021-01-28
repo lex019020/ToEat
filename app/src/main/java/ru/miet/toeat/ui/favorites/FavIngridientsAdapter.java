@@ -78,14 +78,16 @@ public class FavIngridientsAdapter extends ArrayAdapter<Product> {
 
     private void delFromFav(Product p){
         User user = User.getInstance();
-        try
-        {
-            user.getFavorProducts().remove(p);
+        Product rem = null;
+        for (Product ppp:
+             user.getFavorProducts()) {
+            if(ppp.getName().equals(p.getName())){
+                rem = ppp;
+                break;
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        if(rem != null)
+            user.getFavorProducts().remove(rem);
         notifyDataSetChanged();
     }
 }
