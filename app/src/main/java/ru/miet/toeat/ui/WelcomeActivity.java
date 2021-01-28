@@ -40,13 +40,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private boolean tryToLoadData(){
-        try {
-            User.getInstance(getFilesDir() + "/user");
-            DataBase.getInstance(getFilesDir() + "/database");
-        } catch (FormatException e) {
-            e.printStackTrace();
-            return false;
-        }
+        User.getInstance(getFilesDir() + "/user");
+        DataBase.getInstance(getFilesDir() + "/database");
 
         User.getInstance().load();
         DataBase.getInstance().load();
