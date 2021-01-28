@@ -83,6 +83,15 @@ public class Menu extends Nutrition {
 						getSupper().getCalories() + getSnack().getCalories();
 	}
 
+	public void updateDates(){
+		breakfast.updateDateOfLastDispense();
+		tiffin.updateDateOfLastDispense();
+		dinner.updateDateOfLastDispense();
+		snack.updateDateOfLastDispense();
+		supper.updateDateOfLastDispense();
+		anSnack.updateDateOfLastDispense();
+	}
+
 	public boolean equals(Menu compare){
 		boolean ret = true;
 		if(!breakfast.equals(compare.breakfast)) {

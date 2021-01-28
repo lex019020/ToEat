@@ -60,6 +60,8 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     private LinearLayout lay_supper;
     private LinearLayout lay_snack;
 
+    private final boolean DEBUG = true; // TODO remove
+
     private Menu today_menu;
 
     @Override
@@ -151,7 +153,8 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        if(user.getMenu() == null
+        if(     DEBUG // TODO remove
+                || user.getMenu() == null
                 || user.getMenu().getBreakfast() == null
                 || user.getMenu().getBreakfast().getDateOfLastDispense() == null
                 || !user.getMenu().getBreakfast().getDateOfLastDispense()
@@ -163,7 +166,9 @@ public class RationFragment extends Fragment implements View.OnClickListener {
                 menu = user.genRandMenu();
 
                 menu.calcNutrition();
+                menu.updateDates();
                 user.setMenu(menu);
+                addMenuToHistory(menu);
             }
             catch (Throwable e){
                 e.printStackTrace();
@@ -173,6 +178,18 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         else{
             return user.getMenu();
         }
+    }
+
+    private void addMenuToHistory(Menu menu){
+        User user = User.getInstance();
+        user.addMealToHistory(menu.getBreakfast());
+        user.addMealToHistory(menu.getTiffin());
+        user.addMealToHistory(menu.getDinner());
+        user.addMealToHistory(menu.getSnack());
+        user.addMealToHistory(menu.getSupper());
+        user.addMealToHistory(menu.getAnSnack());
+        while (user.getMealHistory().size() > 300)
+            user.getMealHistory().remove(0);
     }
 
     @Override

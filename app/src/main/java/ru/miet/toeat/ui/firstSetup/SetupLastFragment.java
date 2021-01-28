@@ -124,7 +124,7 @@ public class SetupLastFragment extends Fragment {
                         Tools.removeAfterLastDot(Float.toString(p)) + " / " +
                         Tools.removeAfterLastDot(Float.toString(f)) + " / " +
                         Tools.removeAfterLastDot(Float.toString(c)));
-        tv_setup_finish_text4.setText(Float.toString(User.getInstance().getCalories()));
+        tv_setup_finish_text4.setText(Integer.toString((int)User.getInstance().getCalories()));
 
         view.findViewById(R.id.btn_next_last).setOnClickListener((v)-> initDatabaseAndGo());
     }
