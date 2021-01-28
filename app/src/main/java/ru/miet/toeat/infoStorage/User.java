@@ -366,7 +366,7 @@ public class User extends Nutrition {
 			//тип еды
 			if(meal.getType().equals(type)) {
 				//отсутствие повторов, отсутствие нелюбимого
-				if (!checkRepeats || (!isInList(newMenu, meal) && mealIsUnfavor(meal)) || counter > 30) {
+				if ((!checkRepeats || (!isInList(newMenu, meal)) && (!mealIsUnfavor(meal)) || counter > 30)) {
 					// отсутствие нелюбимых ингредиентов
 					if (!mealIngredientsIsUnfavor(meal) || (ingCounter > 20)) {
 						if((meal.getDateOfLastDispense().getTime() - (new Date()).getTime()/ (24 * 60 * 60 * 1000)) > 10 || dtCounter > 10) {
