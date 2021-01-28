@@ -2,6 +2,8 @@ package ru.miet.toeat.model;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.Meal;
@@ -104,6 +106,17 @@ public class Menu extends Nutrition {
 		snack.updateDateOfLastDispense();
 		supper.updateDateOfLastDispense();
 		anSnack.updateDateOfLastDispense();
+	}
+
+	public void substract20Days(){
+		Date date = breakfast.getDateOfLastDispense();
+		date = new Date(date.getTime() - 24*60*60*1000*20);
+		breakfast.setDateOfLastDispense(date);
+		tiffin.setDateOfLastDispense(date);
+		dinner.setDateOfLastDispense(date);
+		snack.setDateOfLastDispense(date);
+		supper.setDateOfLastDispense(date);
+		anSnack.setDateOfLastDispense(date);
 	}
 
 	public boolean equals(Menu compare) {

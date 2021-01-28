@@ -19,6 +19,8 @@ public class Meal extends Nutrition{
 	private ArrayList<String> categories = new ArrayList<>();
 	private String type = "notype";
 	private float rating = 0;
+
+
 	private Date dateOfLastDispense = new Date();
 	private String image="";
 	private String recipeURL = "nourl";
@@ -43,6 +45,9 @@ public class Meal extends Nutrition{
 			this.name = name;
 		else
 			throw new FormatException("Wrong set name in Meal");
+	}
+	public void setDateOfLastDispense(Date dateOfLastDispense) {
+		this.dateOfLastDispense = dateOfLastDispense;
 	}
 	public ArrayList<Ingredient> getIngredients() {
 		return ingredients;

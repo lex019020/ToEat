@@ -116,8 +116,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String[] sex = {"М","Ж"};
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,
-                        1,sex, "Пол", "Выберите пол: ");
+                NumberPickerDialog npd = new NumberPickerDialog(User.getInstance().isSex() ? 0 : 1,
+                        0, 1, sex, "Пол", "Выберите пол: ");
+                //npd.setDefaultValue(User.getInstance().isSex() ? 0 : 1);
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -164,12 +165,11 @@ public class SettingsFragment extends Fragment {
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(170, 120,
-                        220, "Рост", "Выберите рост: ");
+                NumberPickerDialog npd = new NumberPickerDialog((int) User.getInstance().getHeight(),
+                        120, 220, "Рост", "Выберите рост: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-                        int v = npd.getCurrentValue();
                         tv_settings_height.setText(npd.getCurrentValue() + "");
                         try {
                             User.getInstance().setHeight(npd.getCurrentValue());
@@ -185,8 +185,8 @@ public class SettingsFragment extends Fragment {
         imageView35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(70,30,
-                        250, "Вес", "Выберите вес: ");
+                NumberPickerDialog npd = new NumberPickerDialog((int) User.getInstance().getWeight(),
+                        30, 250, "Вес", "Выберите вес: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -206,7 +206,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NumberPickerDialog npd = new NumberPickerDialog(
-                        0, 0,
+                        User.getInstance().getLifestyle().getValue(), 0,
                         User.LifestyleStrings.length - 1, User.LifestyleStrings,
                         "Тип активности", "Выберите тип ктивности: ");
                 npd.setOnOkFunction(new Runnable() {
