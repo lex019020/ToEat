@@ -22,7 +22,7 @@ public class Meal extends Nutrition{
 	private Date dateOfLastDispense = new Date();
 	private String image="";
 	private String recipeURL = "nourl";
-
+	private String description = "no descr";
 	public Meal() {
 		super();
 	}
@@ -137,7 +137,15 @@ public class Meal extends Nutrition{
 		}
 		return ret;
 	}
-
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		if(description.length()==0)
+			this.description=name;
+		else
+			this.description = description;
+	}
 	public String getImage() {
 		return image;
 	}
