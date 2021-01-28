@@ -83,11 +83,21 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         tv_fat.setText("Ж: " + new DecimalFormat("#.#").format(meal.getFat()));
         tv_kcal.setText("ККал: " + new DecimalFormat("#.#").format(meal.getCalories()));
 
-        if(User.getInstance().getFavorMeals().contains(meal)){
+        boolean found = false;
+        for (Meal m:
+             User.getInstance().getFavorMeals()) {
+            if(m.getName().equals(meal.getName())){
+                found = true;
+                break;
+            }
+        }
+        if(found){
             iv_like.setImageResource(R.drawable.ic_favorite);
+            is_fav = true;
         }
         else{
             iv_like.setImageResource(R.drawable.ic_favorite_empty);
+            is_fav = false;
         }
 
             ratingBar.setRating(meal.getRating());
