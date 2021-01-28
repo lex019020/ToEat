@@ -41,7 +41,7 @@ public class SetupFirstFragment extends Fragment {
 
     Bundle bundle = new Bundle();
     String name = "";
-    Boolean sex = false;     // не забыть держать кнопку next_1 disabled, пока значения не корректны
+    Boolean sex = true;
 
     GregorianCalendar ch_birth = new GregorianCalendar();
     DateFormat df = new SimpleDateFormat("dd.MM.yyyy");

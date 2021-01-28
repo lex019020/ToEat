@@ -16,8 +16,10 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Menu;
@@ -129,23 +131,31 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         // TODO 111111111111111111111111111111111111111111111111111111111111
         try{
             today_menu = new Menu();
-            today_menu.setBreakfast(new Meal());
-            today_menu.getBreakfast().setName("Стейк из форели с рисом");
-            today_menu.getBreakfast().setIngredients(new ArrayList<>());
-            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
-                    new Product("Форель", 0), "рыба"));
-            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
-                    new Product("рис", 1), "крупы"));
-            today_menu.getBreakfast().setProteins(15f);
-            today_menu.getBreakfast().setFat(25f);
-            today_menu.getBreakfast().setCarbs(6f);
-            today_menu.getBreakfast().setCalories(455f);
+//            today_menu.setBreakfast(new Meal());
+//            today_menu.getBreakfast().setName("Стейк из форели с рисом");
+//            today_menu.getBreakfast().setIngredients(new ArrayList<>());
+//            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
+//                    new Product("Форель", 0), "рыба"));
+//            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
+//                    new Product("рис", 1), "крупы"));
+//            today_menu.getBreakfast().setProteins(15f);
+//            today_menu.getBreakfast().setFat(25f);
+//            today_menu.getBreakfast().setCarbs(6f);
+//            today_menu.getBreakfast().setCalories(455f);
+            Random rand = new Random();
+            Meal meal1 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal2 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal3 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal4 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal5 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal6 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
 
-            today_menu.setTiffin(today_menu.getBreakfast());
-            today_menu.setDinner(today_menu.getBreakfast());
-            today_menu.setAnSnack(today_menu.getBreakfast());
-            today_menu.setSupper(today_menu.getBreakfast());
-            today_menu.setSnack(today_menu.getBreakfast());
+            today_menu.setBreakfast(meal6);
+            today_menu.setTiffin(meal1);
+            today_menu.setDinner(meal2);
+            today_menu.setAnSnack(meal3);
+            today_menu.setSupper(meal4);
+            today_menu.setSnack(meal5);
 
             today_menu.calcNutrition();
         }

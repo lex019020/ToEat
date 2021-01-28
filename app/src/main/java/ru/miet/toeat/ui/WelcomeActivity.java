@@ -34,9 +34,9 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         if(tryToLoadData())
-            (new Handler()).postDelayed(this::switchToMainMenu, 500);
+            switchToMainMenu();
         else
-            (new Handler()).postDelayed(this::switchToSetupPage, 500);
+            switchToSetupPage();
     }
 
     private boolean tryToLoadData(){

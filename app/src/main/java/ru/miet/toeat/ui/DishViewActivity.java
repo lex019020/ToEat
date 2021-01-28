@@ -42,14 +42,15 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_fat;
     private TextView tv_carb;
     private TextView tv_kcal;
+    private boolean ratingChangedInCode = true;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_view);
-
-        meal = (Meal) getIntent().getSerializableExtra("meal");
+        Meal tmeal = (Meal) getIntent().getSerializableExtra("meal");
+        meal = findMeal(tmeal);
         setTitle(meal.getName());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -89,7 +90,8 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
             iv_like.setImageResource(R.drawable.ic_favorite_empty);
         }
 
-        ratingBar.setRating(meal.getRating());
+            ratingBar.setRating(meal.getRating());
+        ratingChangedInCode = false;
     }
 
     @Override
@@ -161,16 +163,10 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
 
     private void setRating(Meal m, float rating){
         DataBase db = DataBase.getInstance();
-        for (Meal x:
-             db.getMeals()) {
-            if(x.equals(m)){
-                try {
-                    x.setRating(rating);
-                } catch (FormatException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        try {
+            m.setRating(rating);
+        } catch (FormatException e) {
+            e.printStackTrace();
         }
     }
 
@@ -181,6 +177,17 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-        setRating(meal, ratingBar.getRating());
+        if(!ratingChangedInCode)
+            setRating(meal, ratingBar.getRating());
+    }
+
+    private Meal findMeal(Meal m){
+        DataBase dataBase = DataBase.getInstance();
+        for (Meal x:
+             dataBase.getMeals()) {
+            if(x.getName().equals(m.getName()))
+                return x;
+        }
+        return null;
     }
 }

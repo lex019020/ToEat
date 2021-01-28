@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="false"
             android:max="10"
-            android:progress="1" />
+            android:progress="0" />
 
         <TextView
             android:id="@+id/tv_setup_fat"
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="10"
-            android:progress="3" />
+            android:progress="2" />
 
         <TextView
             android:id="@+id/tv_setup_carbs"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="10"
-            android:progress="5" />
+            android:progress="4" />
     </LinearLayout>
 
     <Button

@@ -101,6 +101,9 @@ public class Meal extends Nutrition{
 		if(!name.equals(compare.name)) {
 			ret = false;
 		}
+		else{
+			ret = true;
+		}
 		if(!ingredients.equals(compare.ingredients)){
 			ret = false;
 		}
@@ -128,4 +131,6 @@ public class Meal extends Nutrition{
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+
 }
