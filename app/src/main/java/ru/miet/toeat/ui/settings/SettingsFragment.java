@@ -180,7 +180,8 @@ public class SettingsFragment extends Fragment {
 
         imageView37.setOnClickListener(v -> {
             NumberPickerDialog npd = new NumberPickerDialog(
-                    (int)User.getInstance().getProteins(), 1, 10);// prot
+                    (int)User.getInstance().getProteins(), 1, 10,
+                    "Белки" , "Выберите пропорцию белков");// prot
             NumberPickerDialog finalNpd = npd;
             npd.setOnOkFunction(() -> {
                 try {
@@ -192,7 +193,8 @@ public class SettingsFragment extends Fragment {
             finalNpd.show(getParentFragmentManager(), "picker");
 
             npd = new NumberPickerDialog( // fat
-                    (int)User.getInstance().getProteins(), 1, 10);
+                    (int)User.getInstance().getProteins(), 1, 10,
+                    "Жиры", "Выберите пропорцию жиров");
             NumberPickerDialog finalNpd1 = npd;
             npd.setOnOkFunction(() -> {
                 try {
@@ -205,7 +207,8 @@ public class SettingsFragment extends Fragment {
 
 
             npd = new NumberPickerDialog( // carb
-                    (int)User.getInstance().getProteins(), 1, 10);
+                    (int)User.getInstance().getProteins(), 1, 10,
+                    "Углеводы", "Выберите пропорцию углеводов");
             NumberPickerDialog finalNpd2 = npd;
             npd.setOnOkFunction(() -> {
                 try {
@@ -215,6 +218,8 @@ public class SettingsFragment extends Fragment {
                 }
             });
             finalNpd2.show(getParentFragmentManager(), "picker");
+
+
         });
 
         return view;
