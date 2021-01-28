@@ -75,11 +75,7 @@ public class DataBase implements Serializable{
             catch(EOFException e) {
 
             }
-            catch(ClassNotFoundException e) {
-                e.printStackTrace();
-                System.exit(0);
-            }
-            catch(IOException e) {
+            catch(ClassNotFoundException | IOException e) {
                 e.printStackTrace();
                 System.exit(0);
             }

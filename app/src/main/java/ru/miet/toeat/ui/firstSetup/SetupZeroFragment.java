@@ -42,8 +42,7 @@ public class SetupZeroFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((Button)view.findViewById(R.id.btn_next_0)).setOnClickListener((v)->{
-            Navigation.findNavController(view).navigate(R.id.action_setupZeroFragment_to_setupFirstFragment);
-        });
+        view.findViewById(R.id.btn_next_0).setOnClickListener((v)->
+                Navigation.findNavController(view).navigate(R.id.action_setupZeroFragment_to_setupFirstFragment));
     }
 }

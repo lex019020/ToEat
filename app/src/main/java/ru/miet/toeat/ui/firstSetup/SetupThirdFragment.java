@@ -91,7 +91,7 @@ public class SetupThirdFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {            }
         });
 
-        ((Button)view.findViewById(R.id.btn_next_3)).setOnClickListener((v)->{
+        view.findViewById(R.id.btn_next_3).setOnClickListener((v)->{
             Bundle bundle = new Bundle();
             bundle.putAll(getArguments());
             bundle.putFloat("p", p);

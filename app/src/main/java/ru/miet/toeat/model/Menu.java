@@ -1,5 +1,7 @@
 package ru.miet.toeat.model;
 
+import java.lang.reflect.Field;
+
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Nutrition;
 
@@ -64,19 +66,19 @@ public class Menu extends Nutrition {
 	}
 
 	public void calcNutrition() {
-		proteins +=		getBreakfast().getProteins() + getTiffin().getProteins() +
+		proteins =		getBreakfast().getProteins() + getTiffin().getProteins() +
 						getDinner().getProteins() +	getAnSnack().getProteins() +
 						getSupper().getProteins() + getSnack().getProteins();
 
-		fat +=			getBreakfast().getFat() + getTiffin().getFat() +
+		fat =			getBreakfast().getFat() + getTiffin().getFat() +
 						getDinner().getFat() +	getAnSnack().getFat() +
 						getSupper().getFat() + getSnack().getFat();
 
-		carbs +=		getBreakfast().getCarbs() + getTiffin().getCarbs() +
+		carbs =		getBreakfast().getCarbs() + getTiffin().getCarbs() +
 						getDinner().getCarbs() +	getAnSnack().getCarbs() +
 						getSupper().getCarbs() + getSnack().getCarbs();
 
-		calories +=		getBreakfast().getCalories() + getTiffin().getCalories() +
+		calories =		getBreakfast().getCalories() + getTiffin().getCalories() +
 						getDinner().getCalories() +	getAnSnack().getCalories() +
 						getSupper().getCalories() + getSnack().getCalories();
 	}

@@ -16,7 +16,7 @@ public class Meal extends Nutrition{
 
 	private String name = "noname";
 	private ArrayList<Ingredient> ingredients = new ArrayList<>();
-	private ArrayList<String> categories = new ArrayList<>();;
+	private ArrayList<String> categories = new ArrayList<>();
 	private String type = "notype";
 	private float rating = 0;
 	private Date dateOfLastDispense = new Date();
@@ -93,10 +93,10 @@ public class Meal extends Nutrition{
 		dateOfLastDispense = todayWithZeroTime;
 	}
 
-	public void addСategory(String name) {
+	public void addCategory(String name) {
 		categories.add(name);
 	}
-	public void removeСategory(String name) {
+	public void removeCategory(String name) {
 		for(String c : categories) {
 			if(c.equals(name)) {
 				categories.remove(c);
@@ -115,27 +115,23 @@ public class Meal extends Nutrition{
 
 	public boolean equals(Meal compare){
 		boolean ret = true;
-		if(!name.equals(compare.name)) {
-			ret = false;
-		}
-		else{
-			ret = true;
-		}
-		if(!ingredients.equals(compare.ingredients)){
-			ret = false;
-		}
-		if(!categories.equals(compare.categories)){
-			ret = false;
-		}
-		if(!type.equals(compare.type)){
-			ret = false;
-		}
-		if(rating != compare.rating){
-			ret = false;
-		}
-		if(!dateOfLastDispense.equals(compare.dateOfLastDispense)){
-			ret = false;
-		}
+		////бесполезно: 1 url = 1 рецепт
+//		ret = name.equals(compare.name);
+//		if(!ingredients.equals(compare.ingredients)){
+//			ret = false;
+//		}
+//		if(!categories.equals(compare.categories)){
+//			ret = false;
+//		}
+//		if(!type.equals(compare.type)){
+//			ret = false;
+//		}
+//		if(rating != compare.rating){
+//			ret = false;
+//		}
+//		if(!dateOfLastDispense.equals(compare.dateOfLastDispense)){
+//			ret = false;
+//		}
 		if(!recipeURL.equals(compare.recipeURL)) {
 			ret = false;
 		}

@@ -63,7 +63,7 @@ public class SetupSecondFragment extends Fragment {
         np_activity.setDisplayedValues(User.LifestyleStrings);
         np_activity.setWrapSelectorWheel(true);
 
-        ((Button)view.findViewById(R.id.btn_next_2)).setOnClickListener((v)->{
+        view.findViewById(R.id.btn_next_2).setOnClickListener((v)->{
             height = np_height.getValue();
             weight = np_weight.getValue();
             act = np_activity.getValue();

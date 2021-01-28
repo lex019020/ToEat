@@ -75,28 +75,23 @@ public class SetupFirstFragment extends Fragment {
         Button btn_birth=  ((Button)view.findViewById(R.id.btn_replace_some2));
         Button next=  ((Button)view.findViewById(R.id.btn_next_1));
         btn_birth.setText(df.format(ch_birth.getTime()));
-        ((RadioGroup)view.findViewById(R.id.sex_id)).setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup arg0, int id) {
-                switch(id) {
-                    case R.id.rb_setup_male:
-                        sex=true;
-                        break;
-                    case R.id.radioButton2:
-                        sex=false;
-                        break;
-                    default:
-                        break;
-                }
-            }});
+        ((RadioGroup)view.findViewById(R.id.sex_id)).setOnCheckedChangeListener((arg0, id) -> {
+            switch(id) {
+                case R.id.rb_setup_male:
+                    sex=true;
+                    break;
+                case R.id.radioButton2:
+                    sex=false;
+                    break;
+                default:
+                    break;
+            }
+        });
         ((EditText)view.findViewById(R.id.et_setup_name)).addTextChangedListener(new TextWatcher(){
             @Override
             public void afterTextChanged(Editable s) {
                 name=((EditText)view.findViewById(R.id.et_setup_name)).getText().toString();
-                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10
-                        && name.length()>0 && (new GregorianCalendar()).get(Calendar.YEAR)
-                        -ch_birth.get(Calendar.YEAR)<110){
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10 && name.length()>0 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<110){
                     next.setEnabled(true);
 
                 } else{
@@ -120,18 +115,14 @@ public class SetupFirstFragment extends Fragment {
         });
 
 
-        btn_birth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int year = ch_birth.get(Calendar.YEAR);
-                int month = ch_birth.get(Calendar.MONTH);
-                int day = ch_birth.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(getActivity(),
-                        AlertDialog.THEME_HOLO_DARK, dateListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
+        btn_birth.setOnClickListener(v -> {
+            int year = ch_birth.get(Calendar.YEAR);
+            int month = ch_birth.get(Calendar.MONTH);
+            int day = ch_birth.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            AlertDialog.THEME_HOLO_DARK, dateListener, year, month, day);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
         });
 
         dateListener = new DatePickerDialog.OnDateSetListener() {

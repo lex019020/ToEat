@@ -12,9 +12,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.lang.reflect.Array;
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.Locale;
 
 import ru.miet.toeat.model.FormatException;
@@ -36,7 +39,7 @@ public class User extends Nutrition {
 	private User() {
 		super();
 	}
-	private User(String dataFilePath) throws FormatException{
+	private User(String dataFilePath) {
 		super();
 		setDataFilePath(dataFilePath);
 	}
@@ -80,7 +83,7 @@ public class User extends Nutrition {
 		max(4);
 
 		private final int value;
-		private Lifestyle(int value) {
+		Lifestyle(int value) {
 			this.value = value;
 		}
 
@@ -141,7 +144,7 @@ public class User extends Nutrition {
 	}
 	public void removeFavorMeal(String name) {
 		for(Meal m : favorMeals) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				favorMeals.remove(m);
 			}
 		}
@@ -151,7 +154,7 @@ public class User extends Nutrition {
 	}
 	public void removeUnfavorMeal(String name) {
 		for(Meal m : unfavorMeals) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				unfavorMeals.remove(m);
 			}
 		}
@@ -161,7 +164,7 @@ public class User extends Nutrition {
 	}
 	public void removeFavorProduct(String name) {
 		for(Product p : favorProducts) {
-			if(p.getName() == name) {
+			if(p.getName().equals(name)) {
 				favorProducts.remove(p);
 			}
 		}
@@ -171,7 +174,7 @@ public class User extends Nutrition {
 	}
 	public void removeUnfavorProduct(String name) {
 		for(Product p : unfavorProducts) {
-			if(p.getName() == name) {
+			if(p.getName().equals(name)) {
 				unfavorProducts.remove(p);
 			}
 		}
@@ -181,7 +184,7 @@ public class User extends Nutrition {
 	}
 	public void removeMealFromHistory(String name) {
 		for(Meal m : mealHistory) {
-			if(m.getName() == name) {
+			if(m.getName().equals(name)) {
 				mealHistory.remove(m);
 			}
 		}
@@ -290,9 +293,51 @@ public class User extends Nutrition {
 		this.dataFilePath = dataFilePath;
 	}
 
-	//TODO: implement this
-	public void genMenu() {
+	//TODO: add more logic, define special way
+	public Menu genMenu() {
+		Menu newMenu = genRandMenu();
 
+
+		return newMenu;
+	}
+
+	public Menu genRandMenu() {
+		Menu newMenu = new Menu();
+		newMenu.setBreakfast(getMealByType(newMenu, "Завтрак", false));
+		newMenu.setSnack(getMealByType(newMenu, "Перекус", false));
+		newMenu.setSupper(getMealByType(newMenu, "Ужин", false));
+		newMenu.setDinner(getMealByType(newMenu, "Обед", false));
+		newMenu.setAnSnack(getMealByType(newMenu, "Перекус", false));
+		newMenu.setTiffin(getMealByType(newMenu, "Второй завтрак", false));
+		return newMenu;
+	}
+
+	//checkrepeats нужно.
+	private Meal getMealByType(Menu newMenu, String type, boolean checkRepeats) {
+		Random rand = new Random();
+		Meal meal;
+		while(true) {
+			meal = DataBase.getInstance().getMeals().get(rand.nextInt(DataBase.getInstance().getMeals().size()));
+			//тип еды
+			if(meal.getType().equals(type)) {
+				//отсутствие повторов
+				if (!checkRepeats || !isInList(newMenu, meal)) {
+					break;
+				}
+			}
+		}
+		return meal;
+	}
+
+	//TODO implement
+	private boolean mealIsUnliked () {
+		return true;
+	}
+
+	private boolean isInList (Menu cMenu, Meal meal) {
+		return (meal.equals(cMenu.getAnSnack()) || meal.equals(cMenu.getBreakfast()) ||
+				meal.equals(cMenu.getDinner()) || meal.equals(cMenu.getSnack()) ||
+				meal.equals(cMenu.getSupper()) || meal.equals(cMenu.getTiffin()));
 	}
 
 	public void upload(){
@@ -305,21 +350,16 @@ public class User extends Nutrition {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void load(){
 		File f = new File(dataFilePath);
 		if(f.exists() && !f.isDirectory()) {
 			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(f))) {
 				user = (User) in.readObject();
 			}
-			catch(EOFException e) {
+			catch(EOFException ignored) {
 
 			}
-			catch(ClassNotFoundException e) {
-				e.printStackTrace();
-				System.exit(0);
-			}
-			catch(IOException e) {
+			catch(ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 				System.exit(0);
 			}
