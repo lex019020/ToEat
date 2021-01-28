@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Locale;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.Ingredient;
+import ru.miet.toeat.model.Product;
 
 public class IngredientAdapter extends ArrayAdapter<Ingredient> {
     private List<Ingredient> ingredients;
@@ -110,20 +112,54 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
     }
 
     private boolean isIngridientFavorite(Ingredient ingredient){
-        // TODO
+        User user = User.getInstance();
+        for(Product i:
+        user.getFavorProducts()){
+            if(i.equals(ingredient.getProduct()))
+                return true;
+        }
         return false;
     }
 
     private boolean isIngridientUnfavorite(Ingredient ingredient){
-        // TODO
+        User user = User.getInstance();
+        for(Product i:
+                user.getUnfavorProducts()){
+            if(i.equals(ingredient.getProduct()))
+                return true;
+        }
         return false;
     }
 
     private void setIngredientFavorite(Ingredient ingredient, boolean set){
-        // TODO
+        User user = User.getInstance();
+        if(set) {
+            user.addFavorProduct(ingredient.getProduct());
+        }
+        else{
+            try
+            {
+                user.getFavorProducts().remove(ingredient.getProduct());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private void setIngredientUnfavorite(Ingredient ingredient, boolean set){
-        // TODO
+        User user = User.getInstance();
+        if(set) {
+            user.addUnfavorProduct(ingredient.getProduct());
+        }
+        else{
+            try
+            {
+                user.getUnfavorProducts().remove(ingredient.getProduct());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

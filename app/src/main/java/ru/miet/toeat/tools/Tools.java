@@ -1,9 +1,11 @@
 package ru.miet.toeat.tools;
 
 import java.io.*;
+import android.content.Context;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Tools
@@ -24,7 +26,7 @@ public class Tools
 			}
 		}
 		public static ArrayList<Object> deserialize(String filePath) {
-			ArrayList<Object> result = new ArrayList<Object>();
+			ArrayList<Object> result = new ArrayList<>();
 
 			File f = new File(filePath);
 			if(f.exists() && !f.isDirectory()) {
@@ -86,8 +88,9 @@ public class Tools
 		//method create a new file and write content in
 		public static void createFile(String path, String content) {
 			try {
-				FileWriter writer = new FileWriter(path);
-				writer.write(content);
+				FileOutputStream writer = new FileOutputStream( path, false);
+
+				writer.write(content.getBytes());
 				writer.close();
 			}
 			catch (IOException e) {
@@ -99,14 +102,14 @@ public class Tools
 
 		//method to read content of the file
 		public static String readFile(String path) {
-			String result = "";
+			StringBuilder result = new StringBuilder();
 			try {
 				File f = new File(path);
 				if(f.exists() && !f.isDirectory()) {
-					FileReader reader = new FileReader(f);
+					FileInputStream reader = new FileInputStream(f);
 					Scanner scan = new Scanner(reader);
 					while (scan.hasNextLine()) {
-						result += scan.nextLine() + "\n";
+						result.append(scan.nextLine()).append("\n");
 					}
 					scan.close();
 					reader.close();
@@ -120,7 +123,7 @@ public class Tools
 				e.printStackTrace();
 				System.exit(0);
 			}
-			return result;
+			return result.toString();
 		}
 	}
 
@@ -135,8 +138,8 @@ public class Tools
 	/* implement this interface like:
 	 * Tools.Func myFunc = () -> { }
 	 */
-	public static interface Func extends Runnable{
-		public void run();
+	public interface Func extends Runnable{
+		void run();
 	}
 
 	//run this method using Func or Runnable object
@@ -196,5 +199,9 @@ public class Tools
 			return !string.equals("");
 		else
 			return (!string.equals("")) && (!string.contains(incorrectChars));
+	}
+
+	public static String removeAfterLastDot(String str){
+		return str.substring(0,str.indexOf('.'));
 	}
 }

@@ -65,15 +65,22 @@ public class Menu extends Nutrition {
 		this.snack = snack;
 	}
 
-	//TODO: check and think about exceptions
-	public void calcNutrition() /*throws IllegalAccessException*/ {
-		proteins = breakfast.proteins + tiffin.proteins + dinner.proteins + snack.proteins +
-				supper.proteins + anSnack.proteins;
-		fat = breakfast.fat + tiffin.fat + dinner.fat + snack.fat + supper.fat + anSnack.fat;
-		calories = breakfast.calories + tiffin.calories + dinner.calories +
-				snack.calories + supper.calories + anSnack.calories;
-		carbs = breakfast.carbs + tiffin.carbs + dinner.carbs + snack.carbs + supper.carbs +
-				anSnack.carbs;
+	public void calcNutrition() {
+		proteins =		getBreakfast().getProteins() + getTiffin().getProteins() +
+						getDinner().getProteins() +	getAnSnack().getProteins() +
+						getSupper().getProteins() + getSnack().getProteins();
+
+		fat =			getBreakfast().getFat() + getTiffin().getFat() +
+						getDinner().getFat() +	getAnSnack().getFat() +
+						getSupper().getFat() + getSnack().getFat();
+
+		carbs =		getBreakfast().getCarbs() + getTiffin().getCarbs() +
+						getDinner().getCarbs() +	getAnSnack().getCarbs() +
+						getSupper().getCarbs() + getSnack().getCarbs();
+
+		calories =		getBreakfast().getCalories() + getTiffin().getCalories() +
+						getDinner().getCalories() +	getAnSnack().getCalories() +
+						getSupper().getCalories() + getSnack().getCalories();
 	}
 
 	public boolean equals(Menu compare){

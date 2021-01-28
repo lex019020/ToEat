@@ -1,5 +1,6 @@
 package ru.miet.toeat.ui.todayMenu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Menu;
@@ -23,6 +27,8 @@ import ru.miet.toeat.model.Product;
 import ru.miet.toeat.ui.DishViewActivity;
 
 
+@SuppressWarnings("FieldCanBeLocal")
+@SuppressLint("SetTextI18n")
 public class RationFragment extends Fragment implements View.OnClickListener {
 
 
@@ -36,6 +42,10 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     private TextView tv_aft_snack;
     private TextView tv_supper;
     private TextView tv_snack;
+    private TextView tv_carb;
+    private TextView tv_fat;
+    private TextView tv_prot;
+    private TextView tv_kcal;
 
     private LinearLayout lay_list;
     private LinearLayout lay_breakfast;
@@ -85,32 +95,69 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         lay_snack.setOnClickListener(this);
         lay_supper.setOnClickListener(this);
         lay_tiffin.setOnClickListener(this);
-        // TODO
+
+        tv_prot  = getView().findViewById(R.id.tv_menu_prot);
+        tv_fat  = getView().findViewById(R.id.tv_menu_fat);
+        tv_carb  = getView().findViewById(R.id.tv_menu_carb);
+        tv_kcal  = getView().findViewById(R.id.tv_menu_kcal);
 
         loadTodayMenu();
+
+        updateTextViews();
+
+    }
+
+    private void updateTextViews() {
+        tv_breakfast.setText(today_menu.getBreakfast().getName());
+        tv_tiffin.setText(today_menu.getTiffin().getName());
+        tv_dinner.setText(today_menu.getDinner().getName());
+        tv_aft_snack.setText(today_menu.getAnSnack().getName());
+        tv_supper.setText(today_menu.getSupper().getName());
+        tv_snack.setText(today_menu.getSnack().getName());
+
+        tv_carb.setText("У: " + new DecimalFormat("#.#")
+                .format(today_menu.getCarbs()));
+        tv_fat.setText("Ж: " + new DecimalFormat("#.#")
+                .format(today_menu.getFat()));
+        tv_prot.setText("Б: " + new DecimalFormat("#.#")
+                .format(today_menu.getProteins()));
+        tv_kcal.setText("Ккал: " + new DecimalFormat("#.#")
+                .format(today_menu.getCalories()));
+
+
     }
 
     private void loadTodayMenu(){
         // TODO 111111111111111111111111111111111111111111111111111111111111
         try{
             today_menu = new Menu();
-            today_menu.setBreakfast(new Meal());
-            today_menu.getBreakfast().setName("Стейк из форели с рисом");
-            today_menu.getBreakfast().setIngredients(new ArrayList<>());
-            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
-                    new Product("Форель", 0), "рыба"));
-            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
-                    new Product("рис", 1), "крупы"));
-            today_menu.getBreakfast().setProteins(15f);
-            today_menu.getBreakfast().setFat(25f);
-            today_menu.getBreakfast().setCarbs(6f);
-            today_menu.getBreakfast().setCalories(455f);
+//            today_menu.setBreakfast(new Meal());
+//            today_menu.getBreakfast().setName("Стейк из форели с рисом");
+//            today_menu.getBreakfast().setIngredients(new ArrayList<>());
+//            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
+//                    new Product("Форель", 0), "рыба"));
+//            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
+//                    new Product("рис", 1), "крупы"));
+//            today_menu.getBreakfast().setProteins(15f);
+//            today_menu.getBreakfast().setFat(25f);
+//            today_menu.getBreakfast().setCarbs(6f);
+//            today_menu.getBreakfast().setCalories(455f);
+            Random rand = new Random();
+            Meal meal1 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal2 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal3 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal4 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal5 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+            Meal meal6 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
 
-            today_menu.setTiffin(today_menu.getBreakfast());
-            today_menu.setDinner(today_menu.getBreakfast());
-            today_menu.setAnSnack(today_menu.getBreakfast());
-            today_menu.setSupper(today_menu.getBreakfast());
-            today_menu.setSnack(today_menu.getBreakfast());
+            today_menu.setBreakfast(meal6);
+            today_menu.setTiffin(meal1);
+            today_menu.setDinner(meal2);
+            today_menu.setAnSnack(meal3);
+            today_menu.setSupper(meal4);
+            today_menu.setSnack(meal5);
+
+            today_menu.calcNutrition();
         }
         catch (Throwable e){
             e.printStackTrace();

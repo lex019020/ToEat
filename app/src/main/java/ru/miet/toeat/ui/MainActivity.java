@@ -13,6 +13,8 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
+import ru.miet.toeat.infoStorage.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,4 +40,27 @@ public class MainActivity extends AppCompatActivity {
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        User.getInstance().upload();
+        DataBase.getInstance().upload();
+        super.onStop();
+    }
+
+    //TODO delete these maybe?
+//    @Override
+//    protected void onStop() {
+//        User.getInstance().upload();
+//        DataBase.getInstance().upload();
+//        super.onStop();
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        User.getInstance().upload();
+//        DataBase.getInstance().upload();
+//        super.onDestroy();
+//    }
 }

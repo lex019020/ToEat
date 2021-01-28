@@ -10,6 +10,7 @@ import ru.miet.toeat.model.Menu;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestDB {
     private Meal breakfast = new Meal();
@@ -34,6 +35,8 @@ public class TestDB {
             breakfast.setFat(0);
             breakfast.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -52,7 +55,8 @@ public class TestDB {
             tiffin.setFat(0);
             tiffin.setProteins(0);
         } catch (FormatException e) {
-
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -71,6 +75,8 @@ public class TestDB {
             dinner.setFat(0);
             dinner.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -89,6 +95,8 @@ public class TestDB {
             anSnack.setFat(0);
             anSnack.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -107,6 +115,8 @@ public class TestDB {
             supper.setFat(0);
             supper.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;
@@ -125,6 +135,8 @@ public class TestDB {
             snack.setFat(0);
             snack.setProteins(0);
         } catch (FormatException e) {
+            e.printStackTrace();
+            assertTrue(true);
         } catch (Exception e){
             e.printStackTrace();
             badError = true;

@@ -46,9 +46,7 @@ public class DataBase implements Serializable{
         return base;
     }
     public static DataBase getInstance(String dbFilePath) {
-        if(base == null) {
-            base = new DataBase(dbFilePath);
-        }
+        base = new DataBase(dbFilePath);
         return base;
     }
 
@@ -60,7 +58,7 @@ public class DataBase implements Serializable{
     }
 
     public void upload(){
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath, false))){
             oos.writeObject(base);
         }
         catch(IOException e) {
@@ -77,11 +75,7 @@ public class DataBase implements Serializable{
             catch(EOFException e) {
 
             }
-            catch(ClassNotFoundException e) {
-                e.printStackTrace();
-                System.exit(0);
-            }
-            catch(IOException e) {
+            catch(ClassNotFoundException | IOException e) {
                 e.printStackTrace();
                 System.exit(0);
             }

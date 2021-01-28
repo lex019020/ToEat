@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_setup"
+    app:startDestination="@id/setupZeroFragment">
+
+    <fragment
+        android:id="@+id/setupZeroFragment"
+        android:name="ru.miet.toeat.ui.firstSetup.SetupZeroFragment"
+        android:label="fragment_setup_zero"
+        tools:layout="@layout/fragment_setup_zero" >
+        <action
+            android:id="@+id/action_setupZeroFragment_to_setupFirstFragment"
+            app:destination="@id/setupFirstFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setupFirstFragment"
+        android:name="ru.miet.toeat.ui.firstSetup.SetupFirstFragment"
+        android:label="fragment_setup_one"
+        tools:layout="@layout/fragment_setup_one" >
+        <action
+            android:id="@+id/action_setupFirstFragment_to_setupSecondFragment"
+            app:destination="@id/setupSecondFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setupSecondFragment"
+        android:name="ru.miet.toeat.ui.firstSetup.SetupSecondFragment"
+        android:label="fragment_setup_two"
+        tools:layout="@layout/fragment_setup_two" >
+        <action
+            android:id="@+id/action_setupSecondFragment_to_setupThree"
+            app:destination="@id/setupThree"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setupThree"
+        android:name="ru.miet.toeat.ui.firstSetup.SetupThirdFragment"
+        android:label="fragment_setup_three"
+        tools:layout="@layout/fragment_setup_three" >
+        <action
+            android:id="@+id/action_setupThree_to_setupLast"
+            app:destination="@id/setupLast"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setupLast"
+        android:name="ru.miet.toeat.ui.firstSetup.SetupLastFragment"
+        android:label="fragment_setup_last"
+        tools:layout="@layout/fragment_setup_last" />
+</navigation>

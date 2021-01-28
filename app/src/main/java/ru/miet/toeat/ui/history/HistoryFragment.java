@@ -14,8 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
@@ -61,9 +63,10 @@ public class HistoryFragment extends Fragment {
     }
 
     private void loadHistory(){
-        history = new ArrayList<>();
+        history = new ArrayList<>(User.getInstance().getMealHistory());
+        Collections.reverse(history);
 
-        // TODO implement
+        // FIXME test
         // MUST get history of meals where top is latest
         try
         {

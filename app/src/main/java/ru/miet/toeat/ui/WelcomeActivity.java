@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,9 @@ import android.os.Handler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
+import ru.miet.toeat.infoStorage.User;
+import ru.miet.toeat.model.FormatException;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -30,14 +34,26 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         if(tryToLoadData())
-            (new Handler()).postDelayed(this::switchToMainMenu, 500);
+            switchToMainMenu();
         else
-            (new Handler()).postDelayed(this::switchToSetupPage, 500);
+            switchToSetupPage();
     }
 
     private boolean tryToLoadData(){
-        //TODO
-        return true;
+        //TODO Load DB and User here
+        try {
+            User.getInstance(getFilesDir() + "/user");
+            DataBase.getInstance(getFilesDir() + "/database");
+        } catch (FormatException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        User.getInstance().load();
+        DataBase.getInstance().load();
+
+        return User.getInstance().getWeight() != 0
+                && DataBase.getInstance().getMeals().size() > 0;
     }
 
     private void switchToMainMenu(){
@@ -47,7 +63,9 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void switchToSetupPage(){
-        //TODO
+        Intent intent = new Intent(WelcomeActivity.this, FirstSetupActivity.class);
+        intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }

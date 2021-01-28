@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.02" />
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_next_0"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Начать"
