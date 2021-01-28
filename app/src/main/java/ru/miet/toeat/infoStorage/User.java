@@ -324,13 +324,18 @@ public class User extends Nutrition {
 		return newMenu3;
 	}
 
-	public Menu addOneFavorite(Menu menu) {
+	private Menu addOneFavorite(Menu menu) {
+		if(User.getInstance().getFavorMeals().size() < 1) {
+			return menu;
+		}
+
 		Random rnd = new Random(System.nanoTime());
 		int ctr = 0;
 		do {
 			Meal m = User.getInstance().getFavorMeals().get(rnd.nextInt(User.getInstance().getFavorMeals().size()));
 			if (!isInList(menu, m)) {
 				menu.setMeal(m);
+				break;
 			}
 			ctr++;
 		} while (ctr <= 6);
@@ -354,18 +359,24 @@ public class User extends Nutrition {
 		Random rand = new Random(System.nanoTime());
 		Meal meal;
 		int counter = 0; //чтобы работало при слишком большом количестве нелюбимых блюд
-		int ingCounter = 0; //чтобы работало про слишком большом количестве нелюбимых ингредиентов
+		int ingCounter = 0; //чтобы работало при слишком большом количестве нелюбимых ингредиентов
+		int dtCounter = 0; //чтобы работало при слишком недавней выдаче
 		while(true) {
 			meal = DataBase.getInstance().getMeals().get(rand.nextInt(DataBase.getInstance().getMeals().size()));
 			//тип еды
 			if(meal.getType().equals(type)) {
 				//отсутствие повторов, отсутствие нелюбимого
-				if (!checkRepeats || (!isInList(newMenu, meal) && mealIsUnfavor(meal)) || counter > 30) {
+				if ((!checkRepeats || (!isInList(newMenu, meal)) && (!mealIsUnfavor(meal)) || counter > 30)) {
 					// отсутствие нелюбимых ингредиентов
 					if (!mealIngredientsIsUnfavor(meal) || (ingCounter > 20)) {
-						break;
+						if((meal.getDateOfLastDispense().getTime() - (new Date()).getTime()/ (24 * 60 * 60 * 1000)) > 10 || dtCounter > 10) {
+							break;
+						}
+						dtCounter++;
+						ingCounter = 0;
 					}
 					ingCounter++;
+					counter = 0;
 				}
 				counter++;
 			}
