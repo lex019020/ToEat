@@ -42,6 +42,7 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
     private TextView tv_fat;
     private TextView tv_carb;
     private TextView tv_kcal;
+    private TextView tv_desc;
     private boolean ratingChangedInCode = true;
 
     @SuppressLint("SetTextI18n")
@@ -64,6 +65,7 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         tv_fat = findViewById(R.id.tv_fat);
         tv_carb = findViewById(R.id.tv_carb);
         tv_kcal = findViewById(R.id.tv_kcal);
+        tv_desc = findViewById(R.id.tv_description);
         ratingBar = findViewById(R.id.ratingBar);
 
 
@@ -82,6 +84,7 @@ public class DishViewActivity extends AppCompatActivity implements View.OnClickL
         tv_carb.setText("У: " + new DecimalFormat("#.#").format(meal.getCarbs()));
         tv_fat.setText("Ж: " + new DecimalFormat("#.#").format(meal.getFat()));
         tv_kcal.setText("ККал: " + new DecimalFormat("#.#").format(meal.getCalories()));
+        tv_desc.setText(meal.getDescription());
 
         boolean found = false;
         for (Meal m:

@@ -51,6 +51,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     private TextView tv_fat;
     private TextView tv_prot;
     private TextView tv_kcal;
+    private TextView tv_head;
 
     private LinearLayout lay_list;
     private LinearLayout lay_breakfast;
@@ -87,6 +88,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         tv_aft_snack = getView().findViewById(R.id.tv_afternoon_snack_name);
         tv_supper = getView().findViewById(R.id.tv_supper_name);
         tv_snack = getView().findViewById(R.id.tv_snack_name);
+        tv_head = getView().findViewById(R.id.tv_header);
 
         lay_list = getView().findViewById(R.id.today_menu_layout);
         lay_breakfast = getView().findViewById(R.id.lay_breakfast_element);
@@ -130,6 +132,9 @@ public class RationFragment extends Fragment implements View.OnClickListener {
                 .format(today_menu.getProteins()));
         tv_kcal.setText("Ккал: " + new DecimalFormat("#.#")
                 .format(today_menu.getCalories()));
+
+        tv_head.setText("Добро пожаловать, " + User.getInstance().getName()
+        + "!\n Вот ваш рацион на сегодня:");
 
 
     }
