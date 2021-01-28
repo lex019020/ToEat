@@ -45,7 +45,7 @@ public class Product implements Serializable {
 	public boolean equals(@Nullable Object obj) {
 		if(!(obj instanceof Product))
 			return false;
-		return equals(obj);
+		return equals((Product) obj);
 	}
 
 	public boolean equals(Product compare){

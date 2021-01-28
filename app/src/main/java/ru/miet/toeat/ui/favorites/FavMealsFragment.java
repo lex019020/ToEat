@@ -25,9 +25,17 @@ import ru.miet.toeat.model.Product;
 
 public class FavMealsFragment extends Fragment {
     private ArrayList<Meal> meals;
+    FavMealsAdapter adapter;
 
     public FavMealsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(adapter != null)
+            adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -53,7 +61,8 @@ public class FavMealsFragment extends Fragment {
         loadFavMeals();
         if(meals.size() > 0){
             tw.setVisibility(View.GONE);
-            lw.setAdapter(new FavMealsAdapter(getContext(), 0, meals));
+            adapter = new FavMealsAdapter(getContext(), 0, meals);
+            lw.setAdapter(adapter);
         }
 
     }

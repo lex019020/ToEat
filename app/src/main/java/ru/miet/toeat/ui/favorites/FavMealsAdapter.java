@@ -54,6 +54,7 @@ public class FavMealsAdapter extends ArrayAdapter<Meal> {
             Intent intent = new Intent(context, DishViewActivity.class);
             intent.putExtra("meal", item);
             context.startActivity(intent);
+            notifyDataSetChanged();
         });
 
 
