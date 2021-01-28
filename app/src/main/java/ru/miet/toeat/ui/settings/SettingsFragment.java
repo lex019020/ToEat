@@ -13,6 +13,7 @@ import dialog.NumberPickerDialog;
 import dialog.TextDialog;
 import ru.miet.toeat.R;
 import ru.miet.toeat.infoStorage.User;
+import ru.miet.toeat.model.FormatException;
 import ru.miet.toeat.tools.Tools;
 
 
@@ -47,16 +48,19 @@ public class SettingsFragment extends Fragment {
         imageView35 = view.findViewById(R.id.imageView35);
         imageView36 = view.findViewById(R.id.imageView36);
 
-        TextDialog td = new TextDialog();
-
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextDialog td = new TextDialog("Введите имя");
                 td.show(getParentFragmentManager(), "picker");
                 td.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-
+                        try {
+                            User.getInstance().setName(td.getCurrentValue());
+                        } catch (FormatException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
@@ -69,7 +73,7 @@ public class SettingsFragment extends Fragment {
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-
+                         User.getInstance().setSex(npd.getCurrentValue() != 0);
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
