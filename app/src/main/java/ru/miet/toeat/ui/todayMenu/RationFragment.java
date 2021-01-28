@@ -14,12 +14,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import ru.miet.toeat.R;
 import ru.miet.toeat.infoStorage.DataBase;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Menu;
@@ -128,39 +133,57 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadTodayMenu(){
-        // TODO 111111111111111111111111111111111111111111111111111111111111
-        try{
-            today_menu = new Menu();
-//            today_menu.setBreakfast(new Meal());
-//            today_menu.getBreakfast().setName("Стейк из форели с рисом");
-//            today_menu.getBreakfast().setIngredients(new ArrayList<>());
-//            today_menu.getBreakfast().getIngredients().add(new Ingredient("250 грамм",
-//                    new Product("Форель", 0), "рыба"));
-//            today_menu.getBreakfast().getIngredients().add(new Ingredient("230 грамм",
-//                    new Product("рис", 1), "крупы"));
-//            today_menu.getBreakfast().setProteins(15f);
-//            today_menu.getBreakfast().setFat(25f);
-//            today_menu.getBreakfast().setCarbs(6f);
-//            today_menu.getBreakfast().setCalories(455f);
-            Random rand = new Random();
-            Meal meal1 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-            Meal meal2 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-            Meal meal3 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-            Meal meal4 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-            Meal meal5 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
-            Meal meal6 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+        today_menu = getToday_menu();
 
-            today_menu.setBreakfast(meal6);
-            today_menu.setTiffin(meal1);
-            today_menu.setDinner(meal2);
-            today_menu.setAnSnack(meal3);
-            today_menu.setSupper(meal4);
-            today_menu.setSnack(meal5);
+    }
 
-            today_menu.calcNutrition();
-        }
-        catch (Throwable e){
+    private Menu getToday_menu(){
+        User user = User.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+        Date todayWithZeroTime = null;
+
+        try {
+            todayWithZeroTime = formatter.parse(formatter.format(today));
+        } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        if(user.getMenu() == null
+                || user.getMenu().getBreakfast() == null
+                || user.getMenu().getBreakfast().getDateOfLastDispense() == null
+                || !user.getMenu().getBreakfast().getDateOfLastDispense()
+                .equals(todayWithZeroTime)){
+            // new menu
+            // TODO start generation
+            try{
+                today_menu = new Menu();
+                Random rand = new Random();
+                Meal meal1 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Meal meal2 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Meal meal3 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Meal meal4 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Meal meal5 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+                Meal meal6 = DataBase.getInstance().getMeals().get(rand.nextInt(300));
+
+                today_menu.setBreakfast(meal6);
+                today_menu.setTiffin(meal1);
+                today_menu.setDinner(meal2);
+                today_menu.setAnSnack(meal3);
+                today_menu.setSupper(meal4);
+                today_menu.setSnack(meal5);
+
+                today_menu.calcNutrition();
+            }
+            catch (Throwable e){
+                e.printStackTrace();
+            }
+            return user.getMenu();
+        }
+        else{
+            return user.getMenu();
         }
     }
 

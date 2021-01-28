@@ -1,5 +1,6 @@
 package ru.miet.toeat.ui.firstSetup;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -74,7 +75,8 @@ public class SetupFirstFragment extends Fragment {
         Button btn_birth=  ((Button)view.findViewById(R.id.btn_replace_some2));
         Button next=  ((Button)view.findViewById(R.id.btn_next_1));
         btn_birth.setText(df.format(ch_birth.getTime()));
-        ((RadioGroup)view.findViewById(R.id.sex_id)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ((RadioGroup)view.findViewById(R.id.sex_id)).setOnCheckedChangeListener(
+                new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup arg0, int id) {
                 switch(id) {
@@ -92,7 +94,9 @@ public class SetupFirstFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 name=((EditText)view.findViewById(R.id.et_setup_name)).getText().toString();
-                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10 && name.length()>0 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<110){
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>10
+                        && name.length()>0 && (new GregorianCalendar()).get(Calendar.YEAR)
+                        -ch_birth.get(Calendar.YEAR)<110){
                     next.setEnabled(true);
 
                 } else{
@@ -122,9 +126,11 @@ public class SetupFirstFragment extends Fragment {
                 int year = ch_birth.get(Calendar.YEAR);
                 int month = ch_birth.get(Calendar.MONTH);
                 int day = ch_birth.get(Calendar.DAY_OF_MONTH);
-                        DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_DarkActionBar, dateListener, year, month, day);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                        AlertDialog.THEME_HOLO_DARK, dateListener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
             }
         });
 

@@ -61,16 +61,6 @@ public class FavIngridientsFragment extends Fragment {
         products = new ArrayList<>();
         products = User.getInstance().getFavorProducts();
 
-        // FIXME for testing only
-//        try
-//        {
-//            Product p = new Product("маслины", 0);
-//            for(int i = 0; i < 30; i++)
-//                products.add(p);
-//        }
-//        catch (FormatException e){
-//            e.printStackTrace();
-//        }
 
     }
 

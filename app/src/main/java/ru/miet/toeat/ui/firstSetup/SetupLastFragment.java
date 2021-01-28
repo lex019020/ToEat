@@ -1,6 +1,7 @@
 package ru.miet.toeat.ui.firstSetup;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -97,7 +99,12 @@ public class SetupLastFragment extends Fragment {
         }
         catch (Exception e){
             e.printStackTrace();
-            //todo message
+            Context context = getActivity().getApplicationContext();
+            CharSequence text = "Ошибка в данных!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
             Navigation.findNavController(view).popBackStack(R.id.setupZeroFragment, false);
         }
 

@@ -34,13 +34,12 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         if(tryToLoadData())
-            switchToMainMenu();
+            (new Handler()).postDelayed(this::switchToMainMenu, 300);
         else
-            switchToSetupPage();
+            (new Handler()).postDelayed(this::switchToSetupPage, 300);
     }
 
     private boolean tryToLoadData(){
-        //TODO Load DB and User here
         try {
             User.getInstance(getFilesDir() + "/user");
             DataBase.getInstance(getFilesDir() + "/database");

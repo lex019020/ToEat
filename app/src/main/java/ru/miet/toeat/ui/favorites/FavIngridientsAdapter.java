@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.Product;
 
 public class FavIngridientsAdapter extends ArrayAdapter<Product> {
@@ -76,7 +77,15 @@ public class FavIngridientsAdapter extends ArrayAdapter<Product> {
     }
 
     private void delFromFav(Product p){
-        // TODO implement
+        User user = User.getInstance();
+        try
+        {
+            user.getFavorProducts().remove(p);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         notifyDataSetChanged();
     }
 }

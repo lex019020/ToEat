@@ -42,9 +42,6 @@ public class IngridientsActivity extends AppCompatActivity{
         return true;
     }
 
-    private void loadIngredients(){
-        // TODO
-    }
 
 
 }
