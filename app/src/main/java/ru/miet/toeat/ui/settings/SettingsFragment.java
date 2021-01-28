@@ -94,7 +94,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 String[] sex = {"М","Ж"};
                 NumberPickerDialog npd = new NumberPickerDialog(0,0,
-                        1,sex, "Ввод", "Значение: ");
+                        1,sex, "Пол", "Выберите пол: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -108,7 +108,7 @@ public class SettingsFragment extends Fragment {
 
         imageView33.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {// todo code here
                 NumberPickerDialog npd = new NumberPickerDialog(0,0,
                         0, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
@@ -125,7 +125,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NumberPickerDialog npd = new NumberPickerDialog(170, 120,
-                        220, "Ввод", "Значение: ");
+                        220, "Рост", "Выберите рост: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -145,7 +145,8 @@ public class SettingsFragment extends Fragment {
         imageView35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(70,30,250, "Ввод", "Значение: ");
+                NumberPickerDialog npd = new NumberPickerDialog(70,30,
+                        250, "Вес", "Выберите вес: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -166,12 +167,15 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 NumberPickerDialog npd = new NumberPickerDialog(
                         0, 0,
-                        User.LifestyleStrings.length - 1, User.LifestyleStrings, "Ввод", "Значение: ");
+                        User.LifestyleStrings.length - 1, User.LifestyleStrings,
+                        "Тип активности", "Выберите тип ктивности: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
-                        tv_settings_lifestyle.setText(User.getInstance().getLifestyle().getString(npd.getCurrentValue()));
-                        User.getInstance().setLifestyle(User.Lifestyle.values()[npd.getCurrentValue()]);
+                        tv_settings_lifestyle.setText(User.getInstance().getLifestyle()
+                                .getString(npd.getCurrentValue()));
+                        User.getInstance().setLifestyle(
+                                User.Lifestyle.values()[npd.getCurrentValue()]);
                     }
                 });
                 npd.show(getParentFragmentManager(), "picker");
