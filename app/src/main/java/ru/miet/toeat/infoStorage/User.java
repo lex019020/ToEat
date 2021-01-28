@@ -21,6 +21,7 @@ import java.util.Random;
 import java.util.Locale;
 
 import ru.miet.toeat.model.FormatException;
+import ru.miet.toeat.model.Ingredient;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Menu;
 import ru.miet.toeat.model.Nutrition;
@@ -63,7 +64,7 @@ public class User extends Nutrition {
 		}
 		return user;
 	}
-	public static User getInstance(String dataFilePath) throws FormatException {
+	public static User getInstance(String dataFilePath) {
 		user = new User(dataFilePath);
 		return user;
 	}
@@ -297,15 +298,46 @@ public class User extends Nutrition {
 		this.dataFilePath = dataFilePath;
 	}
 
-	//TODO: add more logic, define special way
+
 	public Menu genMenu() {
-		Menu newMenu = genRandMenu();
+		Menu newMenu1 = genNewMenu();
+		Menu newMenu2 = genNewMenu();
+		Menu newMenu3 = genNewMenu();
+		newMenu1 = addOneFavorite(newMenu1);
+		newMenu2 = addOneFavorite(newMenu2);
+		newMenu3 = addOneFavorite(newMenu3);
+		//TODO: approximation to cal and nutrition
+		//TODO: add lastTime
 
-
-		return newMenu;
+		double menuRating1 = newMenu1.getAvgRating();
+		double menuRating2 = newMenu2.getAvgRating();
+		double menuRating3 = newMenu3.getAvgRating();
+		if(menuRating1 > menuRating2) {
+			if (menuRating1 > menuRating3) {
+				return newMenu1;
+			}
+		} else {
+			if (menuRating2 > menuRating3) {
+				return newMenu2;
+			}
+		}
+		return newMenu3;
 	}
 
-	public Menu genRandMenu() {
+	public Menu addOneFavorite(Menu menu) {
+		Random rnd = new Random(System.nanoTime());
+		int ctr = 0;
+		do {
+			Meal m = User.getInstance().getFavorMeals().get(rnd.nextInt(User.getInstance().getFavorMeals().size()));
+			if (!isInList(menu, m)) {
+				menu.setMeal(m);
+			}
+			ctr++;
+		} while (ctr <= 6);
+		return menu;
+	}
+
+	public Menu genNewMenu() {
 		Menu newMenu = new Menu();
 		newMenu.setBreakfast(getMealByType(newMenu, "Завтрак", false));
 		newMenu.setSnack(getMealByType(newMenu, "Перекус", false));
@@ -313,29 +345,47 @@ public class User extends Nutrition {
 		newMenu.setDinner(getMealByType(newMenu, "Обед", false));
 		newMenu.setAnSnack(getMealByType(newMenu, "Перекус", false));
 		newMenu.setTiffin(getMealByType(newMenu, "Второй завтрак", false));
+		newMenu.calcNutrition();
 		return newMenu;
 	}
 
-	//checkrepeats нужно.
+	//checkrepeats нужно чтобы не проверять на наличие в пустом меню
 	private Meal getMealByType(Menu newMenu, String type, boolean checkRepeats) {
-		Random rand = new Random();
+		Random rand = new Random(System.nanoTime());
 		Meal meal;
+		int counter = 0; //чтобы работало при слишком большом количестве нелюбимых блюд
+		int ingCounter = 0; //чтобы работало про слишком большом количестве нелюбимых ингредиентов
 		while(true) {
 			meal = DataBase.getInstance().getMeals().get(rand.nextInt(DataBase.getInstance().getMeals().size()));
 			//тип еды
 			if(meal.getType().equals(type)) {
-				//отсутствие повторов
-				if (!checkRepeats || !isInList(newMenu, meal)) {
-					break;
+				//отсутствие повторов, отсутствие нелюбимого
+				if (!checkRepeats || (!isInList(newMenu, meal) && mealIsUnfavor(meal)) || counter > 30) {
+					// отсутствие нелюбимых ингредиентов
+					if (!mealIngredientsIsUnfavor(meal) || (ingCounter > 20)) {
+						break;
+					}
+					ingCounter++;
 				}
+				counter++;
 			}
 		}
 		return meal;
 	}
 
-	//TODO implement
-	private boolean mealIsUnliked () {
-		return true;
+	//true если в списке нелюбимого
+	private boolean mealIsUnfavor (Meal meal) {
+		return User.getInstance().getUnfavorMeals().contains(meal);
+	}
+
+	//true если хоть один из ингредиентов в списке нелюбимого
+	private boolean mealIngredientsIsUnfavor (Meal meal) {
+		for (Ingredient in: meal.getIngredients()) {
+			if(User.getInstance().getUnfavorProducts().contains(in.getProduct())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isInList (Menu cMenu, Meal meal) {
