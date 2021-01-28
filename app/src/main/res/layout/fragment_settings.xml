@@ -59,6 +59,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="Зубенко Михаил" />
             </LinearLayout>
@@ -102,6 +104,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="Мужской" />
             </LinearLayout>
@@ -145,6 +149,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="25" />
             </LinearLayout>
@@ -188,6 +194,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="188" />
             </LinearLayout>
@@ -231,6 +239,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="80" />
             </LinearLayout>
@@ -274,12 +284,59 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:text="Активный" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageView36"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_edit_white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_settings_pfc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    style="@style/MealTypeCaption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="Соотношение Б / Ж / У" />
+
+                <TextView
+                    android:id="@+id/tv_settings_pfc"
+                    style="@style/MealNameInList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="false"
+                    android:text="1 / 3 / 5" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView37"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
