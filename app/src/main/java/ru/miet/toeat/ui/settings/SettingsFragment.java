@@ -92,6 +92,15 @@ public class SettingsFragment extends Fragment {
                 td.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
+                        if(td.getCurrentValue().length() < 1 ||
+                        td.getCurrentValue().length() > 20){
+                            Context context = getActivity().getApplicationContext();
+                            CharSequence text = "Имя введено некорректно!";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            return;
+                        }
                         try {
                             tv_settings_name.setText(td.getCurrentValue());
                             User.getInstance().setName(td.getCurrentValue());
