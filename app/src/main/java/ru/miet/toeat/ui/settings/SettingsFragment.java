@@ -1,5 +1,6 @@
 package ru.miet.toeat.ui.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,6 @@ import dialog.TextDialog;
 import ru.miet.toeat.R;
 import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.FormatException;
-import ru.miet.toeat.tools.Tools;
 
 
 public class SettingsFragment extends Fragment {
@@ -35,6 +35,7 @@ public class SettingsFragment extends Fragment {
     private TextView tv_settings_height;
     private TextView tv_settings_weight;
     private TextView tv_settings_lifestyle;
+    private TextView tv_settings_pfc;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -57,6 +58,7 @@ public class SettingsFragment extends Fragment {
         tv_settings_height = view.findViewById(R.id.tv_settings_height);
         tv_settings_weight = view.findViewById(R.id.tv_settings_weight);
         tv_settings_lifestyle = view.findViewById(R.id.tv_settings_lifestyle);
+        tv_settings_pfc = view.findViewById(R.id.tv_settings_pfc);
 
         imageView3 = view.findViewById(R.id.imageView3);
         imageView32 = view.findViewById(R.id.imageView32);
@@ -66,12 +68,7 @@ public class SettingsFragment extends Fragment {
         imageView36 = view.findViewById(R.id.imageView36);
         imageView37 = view.findViewById(R.id.imageView37);
 
-        tv_settings_name.setText(User.getInstance().getName());
-        tv_settings_sex.setText(User.getInstance().isSex() ? "Мужской" : "Женский");
-        tv_settings_age.setText(new SimpleDateFormat("MM.dd.yyyy").format(User.getInstance().getBirthDate()));
-        tv_settings_height.setText((int) User.getInstance().getHeight() + "");
-        tv_settings_weight.setText((int) User.getInstance().getWeight() + "");
-        tv_settings_lifestyle.setText(User.getInstance().getLifestyle().getString(User.getInstance().getLifestyle().getValue()));
+        updateTextViews();
 
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +93,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String[] sex = {"М","Ж"};
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,1,sex, "Ввод", "Значение: ");
+                NumberPickerDialog npd = new NumberPickerDialog(0,0,
+                        1,sex, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -111,7 +109,8 @@ public class SettingsFragment extends Fragment {
         imageView33.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,0, "Ввод", "Значение: ");
+                NumberPickerDialog npd = new NumberPickerDialog(0,0,
+                        0, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -125,7 +124,8 @@ public class SettingsFragment extends Fragment {
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberPickerDialog npd = new NumberPickerDialog(170, 120, 220, "Ввод", "Значение: ");
+                NumberPickerDialog npd = new NumberPickerDialog(170, 120,
+                        220, "Ввод", "Значение: ");
                 npd.setOnOkFunction(new Runnable() {
                     @Override
                     public void run() {
@@ -219,9 +219,25 @@ public class SettingsFragment extends Fragment {
             });
             finalNpd2.show(getParentFragmentManager(), "picker");
 
-
+            updateTextViews();
         });
 
         return view;
+    }
+
+    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
+    private void updateTextViews() {
+        User user = User.getInstance();
+        tv_settings_name.setText(User.getInstance().getName());
+        tv_settings_sex.setText(User.getInstance().isSex() ? "Мужской" : "Женский");
+        tv_settings_age.setText(
+                new SimpleDateFormat("MM.dd.yyyy").format(User.getInstance().getBirthDate()));
+        tv_settings_height.setText((int) user.getHeight() + "");
+        tv_settings_weight.setText((int) user.getWeight() + "");
+        tv_settings_lifestyle.setText(
+                User.getInstance().getLifestyle().getString(
+                        User.getInstance().getLifestyle().getValue()));
+        tv_settings_sex.setText("" + user.getProteins()
+        + " / " + user.getFat() + " / " + user.getCarbs());
     }
 }
