@@ -24,6 +24,7 @@ public class SettingsFragment extends Fragment {
     ImageView imageView34;
     ImageView imageView35;
     ImageView imageView36;
+    ImageView imageView37;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -47,6 +48,7 @@ public class SettingsFragment extends Fragment {
         imageView34 = view.findViewById(R.id.imageView34);
         imageView35 = view.findViewById(R.id.imageView35);
         imageView36 = view.findViewById(R.id.imageView36);
+        imageView37 = view.findViewById(R.id.imageView37);
 
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,7 @@ public class SettingsFragment extends Fragment {
                 });
             }
         });
+
         imageView32.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +82,7 @@ public class SettingsFragment extends Fragment {
                 npd.show(getParentFragmentManager(), "picker");
             }
         });
+
         imageView33.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +96,7 @@ public class SettingsFragment extends Fragment {
                 npd.show(getParentFragmentManager(), "picker");
             }
         });
+
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +110,7 @@ public class SettingsFragment extends Fragment {
                 npd.show(getParentFragmentManager(), "picker");
             }
         });
+
         imageView35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +124,7 @@ public class SettingsFragment extends Fragment {
                 npd.show(getParentFragmentManager(), "picker");
             }
         });
+
         imageView36.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +139,45 @@ public class SettingsFragment extends Fragment {
                 });
                 npd.show(getParentFragmentManager(), "picker");
             }
+        });
+
+        imageView37.setOnClickListener(v -> {
+            NumberPickerDialog npd = new NumberPickerDialog(
+                    (int)User.getInstance().getProteins(), 1, 10);// prot
+            NumberPickerDialog finalNpd = npd;
+            npd.setOnOkFunction(() -> {
+                try {
+                    User.getInstance().setProteins(finalNpd.getCurrentValue());
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+            });
+            finalNpd.show(getParentFragmentManager(), "picker");
+
+            npd = new NumberPickerDialog( // fat
+                    (int)User.getInstance().getProteins(), 1, 10);
+            NumberPickerDialog finalNpd1 = npd;
+            npd.setOnOkFunction(() -> {
+                try {
+                    User.getInstance().setProteins(finalNpd1.getCurrentValue());
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+            });
+            finalNpd1.show(getParentFragmentManager(), "picker");
+
+
+            npd = new NumberPickerDialog( // carb
+                    (int)User.getInstance().getProteins(), 1, 10);
+            NumberPickerDialog finalNpd2 = npd;
+            npd.setOnOkFunction(() -> {
+                try {
+                    User.getInstance().setProteins(finalNpd2.getCurrentValue());
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+            });
+            finalNpd2.show(getParentFragmentManager(), "picker");
         });
 
         return view;
