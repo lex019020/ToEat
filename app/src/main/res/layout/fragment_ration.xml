@@ -61,6 +61,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>
@@ -105,6 +107,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>
@@ -149,6 +153,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>
@@ -193,6 +199,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>
@@ -237,6 +245,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>
@@ -281,6 +291,8 @@
                     style="@style/MealNameInList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:clickable="false"
                     android:text="Стейк из форели с картошкой" />
             </LinearLayout>

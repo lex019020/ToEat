@@ -143,11 +143,15 @@ public class User extends Nutrition {
 		favorMeals.add(c);
 	}
 	public void removeFavorMeal(String name) {
+		Meal del =  null;
 		for(Meal m : favorMeals) {
 			if(m.getName().equals(name)) {
-				favorMeals.remove(m);
+				del = m;
+				break;
 			}
 		}
+		if(del != null)
+			favorMeals.remove(del);
 	}
 	public void addUnfavorMeal(Meal m) {
 		unfavorMeals.add(m);
