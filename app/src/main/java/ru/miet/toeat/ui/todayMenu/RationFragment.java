@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -61,6 +62,9 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     private LinearLayout lay_supper;
     private LinearLayout lay_snack;
 
+    private Button btn_putaside;
+    private Button btn_replace;
+
     private final boolean DEBUG = true; // TODO remove
 
     private Menu today_menu;
@@ -90,6 +94,11 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         tv_snack = getView().findViewById(R.id.tv_snack_name);
         tv_head = getView().findViewById(R.id.tv_header);
 
+        tv_prot  = getView().findViewById(R.id.tv_menu_prot);
+        tv_fat  = getView().findViewById(R.id.tv_menu_fat);
+        tv_carb  = getView().findViewById(R.id.tv_menu_carb);
+        tv_kcal  = getView().findViewById(R.id.tv_menu_kcal);
+
         lay_list = getView().findViewById(R.id.today_menu_layout);
         lay_breakfast = getView().findViewById(R.id.lay_breakfast_element);
         lay_tiffin = getView().findViewById(R.id.lay_tiffin_element);
@@ -98,6 +107,9 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         lay_supper = getView().findViewById(R.id.lay_supper_element);
         lay_snack = getView().findViewById(R.id.lay_snack_element);
 
+        btn_putaside = getView().findViewById(R.id.btn_putaside);
+        btn_replace = getView().findViewById(R.id.btn_replace);
+
         lay_breakfast.setOnClickListener(this);
         lay_aft_snack.setOnClickListener(this);
         lay_dinner.setOnClickListener(this);
@@ -105,13 +117,15 @@ public class RationFragment extends Fragment implements View.OnClickListener {
         lay_supper.setOnClickListener(this);
         lay_tiffin.setOnClickListener(this);
 
-        tv_prot  = getView().findViewById(R.id.tv_menu_prot);
-        tv_fat  = getView().findViewById(R.id.tv_menu_fat);
-        tv_carb  = getView().findViewById(R.id.tv_menu_carb);
-        tv_kcal  = getView().findViewById(R.id.tv_menu_kcal);
+        btn_replace.setOnClickListener((v)->{
+            replaceMenu();
+        });
+
+        btn_putaside.setOnClickListener((v)->{
+            putMenuAside();
+        });
 
         loadTodayMenu();
-
         updateTextViews();
 
     }
@@ -140,49 +154,64 @@ public class RationFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadTodayMenu(){
-        today_menu = getToday_menu();
-
-    }
-
-    private Menu getToday_menu(){
         User user = User.getInstance();
         @SuppressLint("SimpleDateFormat")
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         Date today = new Date();
         Date todayWithZeroTime = null;
-
         try {
             todayWithZeroTime = formatter.parse(formatter.format(today));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        if(     DEBUG // TODO remove
+        if(     DEBUG
                 || user.getMenu() == null
                 || user.getMenu().getBreakfast() == null
                 || user.getMenu().getBreakfast().getDateOfLastDispense() == null
                 || !user.getMenu().getBreakfast().getDateOfLastDispense()
                 .equals(todayWithZeroTime)){
-            // new menu
-            // TODO start generation
-            try{
-                Menu menu = new Menu();
-                menu = user.genMenu();
-
-                menu.calcNutrition();
-                menu.updateDates();
-                user.setMenu(menu);
-                addMenuToHistory(menu);
-            }
-            catch (Throwable e){
-                e.printStackTrace();
-            }
-            return user.getMenu();
+            today_menu = getNew_menu();
+            user.setMenu(today_menu);
         }
         else{
-            return user.getMenu();
+            today_menu = user.getMenu();
         }
+
+    }
+
+    private Menu getNew_menu(){
+        User user = User.getInstance();
+        Menu menu = null;
+        // new menu
+        try{
+            menu = user.genMenu();
+
+            menu.calcNutrition();
+            menu.updateDates();
+            addMenuToHistory(menu);
+        }
+        catch (Throwable e){
+            e.printStackTrace();
+        }
+        return menu;
+
+    }
+
+    private void replaceMenu(){
+        User user = User.getInstance();
+        today_menu = getNew_menu();
+        user.setMenu(today_menu);
+        updateTextViews();
+    }
+
+    private void putMenuAside(){
+        User user = User.getInstance();
+        // todo call -20 days here
+        today_menu = getNew_menu();
+        user.setMenu(today_menu);
+        updateTextViews();
     }
 
     private void addMenuToHistory(Menu menu){
