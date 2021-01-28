@@ -163,7 +163,7 @@ public class RationFragment extends Fragment implements View.OnClickListener {
             // TODO start generation
             try{
                 Menu menu = new Menu();
-                menu = user.genNewMenu();
+                menu = user.genMenu();
 
                 menu.calcNutrition();
                 menu.updateDates();
