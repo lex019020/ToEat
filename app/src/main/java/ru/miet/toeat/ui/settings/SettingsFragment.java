@@ -1,6 +1,11 @@
 package ru.miet.toeat.ui.settings;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,10 +13,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import dialog.NumberPickerDialog;
 import dialog.TextDialog;
@@ -36,6 +46,10 @@ public class SettingsFragment extends Fragment {
     private TextView tv_settings_weight;
     private TextView tv_settings_lifestyle;
     private TextView tv_settings_pfc;
+
+    GregorianCalendar ch_birth = new GregorianCalendar();
+    DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+    private DatePickerDialog.OnDateSetListener  dateListener;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -106,20 +120,37 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        imageView33.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {// todo code here
-                NumberPickerDialog npd = new NumberPickerDialog(0,0,
-                        0, "Ввод", "Значение: ");
-                npd.setOnOkFunction(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                });
-                npd.show(getParentFragmentManager(), "picker");
-            }
+        imageView33.setOnClickListener(v -> {
+            int year = ch_birth.get(Calendar.YEAR);
+            int month = ch_birth.get(Calendar.MONTH);
+            int day = ch_birth.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                    AlertDialog.THEME_HOLO_DARK, dateListener, year, month, day);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
         });
+
+        dateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                ch_birth.set(year, month, dayOfMonth);
+
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<10 || (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>100) {
+                    Context context = getActivity().getApplicationContext();
+                    CharSequence text = "Вы не подходите по возрасту, для пользования нашим приложением!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else{
+                    try {
+                        User.getInstance().setBirthDate(ch_birth.getTime());
+                        updateTextViews();
+                    } catch (FormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
         imageView34.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,7 +267,7 @@ public class SettingsFragment extends Fragment {
         tv_settings_name.setText(User.getInstance().getName());
         tv_settings_sex.setText(User.getInstance().isSex() ? "Мужской" : "Женский");
         tv_settings_age.setText(
-                new SimpleDateFormat("MM.dd.yyyy").format(User.getInstance().getBirthDate()));
+                new SimpleDateFormat("dd.MM.yyyy").format(User.getInstance().getBirthDate()));
         tv_settings_height.setText((int) user.getHeight() + "");
         tv_settings_weight.setText((int) user.getWeight() + "");
         tv_settings_lifestyle.setText(
