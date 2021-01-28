@@ -44,17 +44,24 @@ public class Ingredient implements Serializable {
 		else
 			throw new FormatException("Wrong set category in Ingredient");
 	}
+
+	//comparing Ingredient with Product
+	public boolean equals(Product compare) {
+		return product.equals(compare);
+	}
+
 	public boolean equals(Ingredient compare){
 		boolean ret = true;
-		if(amount != compare.amount){
-			ret = false;
-		}
 		if(!product.equals(compare.product)){
 			ret = false;
 		}
-		if(!category.equals(compare.category)){
-			ret = false;
-		}
+		////так как это информационные поля, нет необходимости их сравнивать
+//		if(!amount.equals(compare.amount)){
+//			ret = false;
+//		}
+//		if(!category.equals(compare.category)){
+//			ret = false;
+//		}
 		return ret;
 	}
 }
