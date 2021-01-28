@@ -49,18 +49,4 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    //TODO delete these maybe?
-//    @Override
-//    protected void onStop() {
-//        User.getInstance().upload();
-//        DataBase.getInstance().upload();
-//        super.onStop();
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        User.getInstance().upload();
-//        DataBase.getInstance().upload();
-//        super.onDestroy();
-//    }
 }

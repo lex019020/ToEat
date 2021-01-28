@@ -1,6 +1,12 @@
 package ru.miet.toeat.model;
 
+import android.annotation.SuppressLint;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import ru.miet.toeat.tools.Tools;
@@ -73,7 +79,18 @@ public class Meal extends Nutrition{
 	}
 	public void updateDateOfLastDispense() {
 		//sets current date
-		dateOfLastDispense = new Date();
+		@SuppressLint("SimpleDateFormat")
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date today = new Date();
+		Date todayWithZeroTime = null;
+
+		try {
+			todayWithZeroTime = formatter.parse(formatter.format(today));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		dateOfLastDispense = todayWithZeroTime;
 	}
 
 	public void addCategory(String name) {

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import ru.miet.toeat.R;
+import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.ui.DishViewActivity;
 
@@ -33,7 +34,7 @@ public class MealHistoryAdapter extends ArrayAdapter<Meal> {
     @Nullable
     @Override
     public Meal getItem(int position) {
-        return meals.get(position);
+        return findMeal(meals.get(position));
     }
 
     @NonNull
@@ -62,5 +63,15 @@ public class MealHistoryAdapter extends ArrayAdapter<Meal> {
         });
 
         return convertView;
+    }
+
+    private Meal findMeal(Meal m){
+        DataBase dataBase = DataBase.getInstance();
+        for (Meal x:
+                dataBase.getMeals()) {
+            if(x.getName().equals(m.getName()))
+                return x;
+        }
+        return null;
     }
 }

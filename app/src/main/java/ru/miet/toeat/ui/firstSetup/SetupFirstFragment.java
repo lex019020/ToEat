@@ -1,5 +1,6 @@
 package ru.miet.toeat.ui.firstSetup;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -68,11 +69,11 @@ public class SetupFirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        EditText editname= view.findViewById(R.id.et_setup_name);
+        EditText editname=((EditText)view.findViewById(R.id.et_setup_name));
         name=editname.getText().toString();
 
-        Button btn_birth= view.findViewById(R.id.btn_replace_some2);
-        Button next= view.findViewById(R.id.btn_next_1);
+        Button btn_birth=  ((Button)view.findViewById(R.id.btn_replace_some2));
+        Button next=  ((Button)view.findViewById(R.id.btn_next_1));
         btn_birth.setText(df.format(ch_birth.getTime()));
         ((RadioGroup)view.findViewById(R.id.sex_id)).setOnCheckedChangeListener((arg0, id) -> {
             switch(id) {
@@ -118,25 +119,29 @@ public class SetupFirstFragment extends Fragment {
             int year = ch_birth.get(Calendar.YEAR);
             int month = ch_birth.get(Calendar.MONTH);
             int day = ch_birth.get(Calendar.DAY_OF_MONTH);
-                    DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_DarkActionBar, dateListener, year, month, day);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            AlertDialog.THEME_HOLO_DARK, dateListener, year, month, day);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
         });
 
-        dateListener = (view1, year, month, dayOfMonth) -> {
-            ch_birth.set(year, month, dayOfMonth);
-            btn_birth.setText(df.format(ch_birth.getTime()));
-            if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>=10 && name.length()>0 && name.length()<30 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<100){
-                next.setEnabled(true);
-            } else{
-                next.setEnabled(false);
-                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<10 || (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>100) {
-                    Context context = getActivity().getApplicationContext();
-                    CharSequence text = "Вы не подходите по возрасту, для пользования нашим приложением!";
-                    int duration = Toast.LENGTH_SHORT;
+        dateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                ch_birth.set(year, month, dayOfMonth);
+                btn_birth.setText(df.format(ch_birth.getTime()));
+                if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>=10 && name.length()>0 && name.length()<30 && (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<100){
+                    next.setEnabled(true);
+                } else{
+                    next.setEnabled(false);
+                    if((new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)<10 || (new GregorianCalendar()).get(Calendar.YEAR)-ch_birth.get(Calendar.YEAR)>100) {
+                        Context context = getActivity().getApplicationContext();
+                        CharSequence text = "Вы не подходите по возрасту, для пользования нашим приложением!";
+                        int duration = Toast.LENGTH_SHORT;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                 }
             }
         };
