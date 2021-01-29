@@ -219,41 +219,40 @@ public class Menu extends Nutrition {
 	}
 
 	public void approximateNutrition() {
-		double pdf = User.getInstance().getProteins()/User.getInstance().getFat();
-		double pdc = User.getInstance().getProteins()/User.getInstance().getCarbs();
-		float cal = User.getInstance().getCalories();
-		int counter = 0;
+		//int counter = 0;
 		Random rand = new Random(System.nanoTime());
 		while(true) {
-			double pdfdt = pdf - this.getProteins()/this.getFat(); // > 0 если нужно больше
-			double pdcdt = pdc - this.getProteins()/this.getCarbs(); // > 0 если нужно больше
-			double caldt = cal - this.getCalories(); // > 0 если нужно больше
+			double dCarb = User.getInstance().getCarbs() - carbs;
+			double dFat = User.getInstance().getFat() - fat;
+			double dProt = User.getInstance().getProteins() - proteins;
+			double dCal = User.getInstance().getCalories() - calories;
 
-			if(Math.abs(pdfdt) < pdf*0.2 && Math.abs(pdcdt) < pdc*0.2 && Math.abs(caldt) < cal*0.2) {
+			//проверяем на выход
+			if((Math.abs(dCarb) < carbs && Math.abs(dFat) < fat && Math.abs(dProt) < proteins && Math.abs(dCal) < calories*0.1) /*|| counter > 3000*/) {
 				break;
 			}
 
 			Meal meal = DataBase.getInstance().getMeals().get(rand.nextInt(DataBase.getInstance().getMeals().size()));
+			//проверяем нелюбимое
 			if(User.getInstance().isInList(this, meal) || User.getInstance().mealIsUnfavor(meal) ||
 					User.getInstance().mealIngredientsIsUnfavor(meal)) {
+				//counter++;
 				continue;
 			}
+			//counter++;
 
 			Meal oldMeal = getMealByType(meal.getType());
-				if((oldMeal.getCalories() - meal.getCalories())*caldt < 0
-						&& (oldMeal.getProteins()/oldMeal.getFat() - meal.getProteins()/meal.getFat())*pdf < 0
-						&& (oldMeal.getProteins()/oldMeal.getCarbs() - meal.getProteins()/meal.getCarbs())*pdc < 0) {
+			//сравниваем, лучше ли новое
+			if(dCal*(oldMeal.getCalories() - meal.getCalories()) < 0)
+				if((oldMeal.getCalories() - meal.getCalories())*dCal < 0
+						&& ((oldMeal.getProteins() - meal.getProteins())*dProt < 0
+						|| (oldMeal.getCarbs() - meal.getCarbs())*dCarb < 0
+						|| (oldMeal.getFat() - meal.getFat())*dFat < 0)) {
 					setMeal(meal);
 				}
-//			 //need more calories
-//				if(oldMeal.getCalories() < meal.getCalories()
-//						&& (oldMeal.getProteins()/oldMeal.getFat() - meal.getProteins()/meal.getFat())*pdf < 0
-//						&& (oldMeal.getProteins()/oldMeal.getCarbs() - meal.getProteins()/meal.getCarbs())*pdc < 0) {
-//					setMeal(meal);
-			}
-
-			counter++;
+			calcNutrition();
 		}
+	}
 
 	private Meal getMealByType(String type) {
 		if(type.equals("Завтрак")) {
