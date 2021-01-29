@@ -4,7 +4,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
+import ru.miet.toeat.infoStorage.DataBase;
 import ru.miet.toeat.infoStorage.User;
 import ru.miet.toeat.model.Meal;
 import ru.miet.toeat.model.Nutrition;
@@ -214,5 +216,58 @@ public class Menu extends Nutrition {
 		if(m.getType().equals("Перекус")) {
 			this.setSnack(m);
 		}
+	}
+
+	public void approximateNutrition() {
+		double pdf = User.getInstance().getProteins()/User.getInstance().getFat();
+		double pdc = User.getInstance().getProteins()/User.getInstance().getCarbs();
+		float cal = User.getInstance().getCalories();
+		int counter = 0;
+		Random rand = new Random(System.nanoTime());
+		while(true) {
+			double pdfdt = pdf - this.getProteins()/this.getFat(); // > 0 если нужно больше
+			double pdcdt = pdc - this.getProteins()/this.getCarbs(); // > 0 если нужно больше
+			double caldt = cal - this.getCalories(); // > 0 если нужно больше
+
+			if(Math.abs(pdfdt) < pdf*0.2 && Math.abs(pdcdt) < pdc*0.2 && Math.abs(caldt) < cal*0.2) {
+				break;
+			}
+
+			Meal meal = DataBase.getInstance().getMeals().get(rand.nextInt(DataBase.getInstance().getMeals().size()));
+			if(User.getInstance().isInList(this, meal) || User.getInstance().mealIsUnfavor(meal) ||
+					User.getInstance().mealIngredientsIsUnfavor(meal)) {
+				continue;
+			}
+
+			Meal oldMeal = getMealByType(meal.getType());
+				if((oldMeal.getCalories() - meal.getCalories())*caldt < 0
+						&& (oldMeal.getProteins()/oldMeal.getFat() - meal.getProteins()/meal.getFat())*pdf < 0
+						&& (oldMeal.getProteins()/oldMeal.getCarbs() - meal.getProteins()/meal.getCarbs())*pdc < 0) {
+					setMeal(meal);
+				}
+//			 //need more calories
+//				if(oldMeal.getCalories() < meal.getCalories()
+//						&& (oldMeal.getProteins()/oldMeal.getFat() - meal.getProteins()/meal.getFat())*pdf < 0
+//						&& (oldMeal.getProteins()/oldMeal.getCarbs() - meal.getProteins()/meal.getCarbs())*pdc < 0) {
+//					setMeal(meal);
+			}
+
+			counter++;
+		}
+
+	private Meal getMealByType(String type) {
+		if(type.equals("Завтрак")) {
+			return breakfast;
+		}
+		if(type.equals("Обед")) {
+			return dinner;
+		}
+		if(type.equals("Ужин")) {
+			return supper;
+		}
+		if(type.equals("Второй завтрак")) {
+			return tiffin;
+		}
+		return snack;
 	}
 }

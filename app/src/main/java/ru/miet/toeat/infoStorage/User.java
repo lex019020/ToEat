@@ -306,8 +306,9 @@ public class User extends Nutrition {
 		newMenu1 = addOneFavorite(newMenu1);
 		newMenu2 = addOneFavorite(newMenu2);
 		newMenu3 = addOneFavorite(newMenu3);
-		//TODO: approximation to cal and nutrition
-		//TODO: add lastTime
+		newMenu1.approximateNutrition();
+		newMenu2.approximateNutrition();
+		newMenu3.approximateNutrition();
 
 		double menuRating1 = newMenu1.getAvgRating();
 		double menuRating2 = newMenu2.getAvgRating();
@@ -328,7 +329,6 @@ public class User extends Nutrition {
 		if(User.getInstance().getFavorMeals().size() < 1) {
 			return menu;
 		}
-
 		Random rnd = new Random(System.nanoTime());
 		int ctr = 0;
 		do {
@@ -385,12 +385,12 @@ public class User extends Nutrition {
 	}
 
 	//true если в списке нелюбимого
-	private boolean mealIsUnfavor (Meal meal) {
+	public boolean mealIsUnfavor (Meal meal) {
 		return User.getInstance().getUnfavorMeals().contains(meal);
 	}
 
 	//true если хоть один из ингредиентов в списке нелюбимого
-	private boolean mealIngredientsIsUnfavor (Meal meal) {
+	public boolean mealIngredientsIsUnfavor (Meal meal) {
 		for (Ingredient in: meal.getIngredients()) {
 			if(User.getInstance().getUnfavorProducts().contains(in.getProduct())) {
 				return true;
@@ -399,7 +399,7 @@ public class User extends Nutrition {
 		return false;
 	}
 
-	private boolean isInList (Menu cMenu, Meal meal) {
+	public boolean isInList (Menu cMenu, Meal meal) {
 		return (meal.equals(cMenu.getAnSnack()) || meal.equals(cMenu.getBreakfast()) ||
 				meal.equals(cMenu.getDinner()) || meal.equals(cMenu.getSnack()) ||
 				meal.equals(cMenu.getSupper()) || meal.equals(cMenu.getTiffin()));
